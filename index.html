@@ -2,78 +2,101 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Deze meiden hebben zeker geen grenzen!</title>
+  <title>Post Feed</title>
   <style>
-    body {
-      font-family: Arial, sans-serif;
-      background: #fafafa;
-      margin: 0;
-      padding: 0;
-    }
     .container {
       max-width: 600px;
-      margin: auto;
-      padding: 20px;
+      margin: 0 auto;
+      font-family: sans-serif;
     }
+
     .post {
-      background: #fff;
-      border: 1px solid #ddd;
-      margin-bottom: 20px;
+      border: 1px solid #ccc;
+      padding: 10px;
+      margin: 20px 0;
       border-radius: 8px;
-      overflow: hidden;
-      box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+      position: relative;
+      background: #fff;
     }
-    .post img {
-      width: 100%;
-      display: block;
+
+    .sponsored-post {
+      border: 2px solid gold;
     }
-    .caption {
-      padding: 10px 15px;
-      font-size: 16px;
-    }
-    .subtext {
-      padding: 0 15px 10px 15px;
+
+    .sponsored-label {
+      position: absolute;
+      top: -12px;
+      left: 10px;
+      background: gold;
+      color: black;
+      padding: 2px 8px;
       font-size: 12px;
-      color: #777;
+      font-weight: bold;
+      border-radius: 4px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.2);
     }
+
+    .post img {
+      max-width: 100%;
+      border-radius: 6px;
+      margin-top: 10px;
+    }
+
+    .caption {
+      margin-top: 10px;
+    }
+
     .username {
       font-weight: bold;
       margin-right: 5px;
     }
+
+    .subtext {
+      font-size: 12px;
+      color: #666;
+      margin-top: 5px;
+    }
   </style>
 </head>
 <body>
-  <div class="container">
 
-    <div class="post">
-      <img src="https://i.imgur.com/Oqa40WT.jpeg" alt="Beach">
-      <div class="caption"><span class="username">Grenzeloesoe</span>#Missed #Connection. Who knows this guy I met last week?</div>
-      <div class="subtext">Just now • 79 likes • Cannes</div>
-    </div> 
-    
-    <div class="post">
-      <img src="https://i.imgur.com/cT2oiwi.png" alt="Beach">
-      <div class="caption"><span class="username">Nul Grenzen</span>Looking for hot men from Suriname</div>
-      <div class="subtext">Just now • 1,301 likes • Paramaribo</div>
-    </div> 
-    
-    <div class="post">
-      <img src="https://www.shutterstock.com/image-photo/slender-young-blonde-girl-black-600nw-2087069911.jpg" alt="Post Image">
-      <div class="caption"><span class="username">Grenzeloze Meid</span>Had the best coffee today ☕ #blessed</div>
-      <div class="subtext">2 hours ago • 134 likes • Amsterdam</div>
+<div class="container">
+
+  <!-- Sponsored Post -->
+  <div class="post sponsored-post">
+    <div class="sponsored-label">Sponsored Post</div>
+    <img src="https://i.imgur.com/qx9zzYF.jpeg" alt="Beach">
+    <div class="caption">
+      <span class="username">2 and a half men</span>Gezocht: 1 vrouw die écht nul grenzen heeft.
     </div>
-
-    <div class="post">
-      <img src="https://m.media-amazon.com/images/I/71zaHr96UjL._AC_SX679_.jpg" alt="Beach">
-      <div class="caption"><span class="username">No Money no Grenzen</span>Can we live here please 🌊🏖️</div>
-      <div class="subtext">Yesterday • 201 likes • Málaga</div>
+    <div class="subtext">Just now • 3 likes • Madrid</div>
+  </div> 
+  
+  <div class="post">
+    <div class="sponsored-label">Sponsored Post</div>
+    <img src="https://i.imgur.com/Oqa40WT.jpeg" alt="Beach">
+    <div class="caption">
+      <span class="username">Grenzeloesoe</span>#Missed #Connection. Who knows this guy I met last week?
     </div>
-
-
-    
-    <!-- Add more posts below like this -->
-    
+    <div class="subtext">Just now • 79 likes • Cannes</div>
+  </div> 
+  
+  <div class="post">
+    <img src="https://i.imgur.com/cT2oiwi.png" alt="Beach">
+    <div class="caption">
+      <span class="username">Nul Grenzen</span>Looking for hot men from Suriname
+    </div>
   </div>
+
+  <div class="post">
+    <img src="https://m.media-amazon.com/images/I/71zaHr96UjL._AC_SX679_.jpg" alt="Beach">
+    <div class="caption">
+      <span class="username">No Money no Grenzen</span>Can we live here please 🌊🏖️
+    </div>
+    <div class="subtext">Yesterday • 201 likes • Málaga</div>
+  </div>
+
+</div>
+
 </body>
 </html>
