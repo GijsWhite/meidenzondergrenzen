@@ -1,60 +1,101 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
   <title>Post Feed</title>
   <style>
+    body {
+      background: #f9f9f9;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0;
+      padding: 20px 0;
+      color: #333;
+    }
+
     .container {
       max-width: 600px;
       margin: 0 auto;
-      font-family: sans-serif;
+      background: white;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 8px 16px rgba(0,0,0,0.1);
     }
 
     .post {
-      border: 1px solid #ccc;
-      padding: 10px;
+      border: 1px solid #ddd;
+      padding: 15px 15px 25px 15px;
       margin: 20px 0;
-      border-radius: 8px;
+      border-radius: 10px;
       position: relative;
       background: #fff;
+      transition: box-shadow 0.3s ease;
+    }
+    .post:hover {
+      box-shadow: 0 8px 24px rgba(0,0,0,0.12);
     }
 
     .sponsored-post {
       border: 2px solid gold;
+      background: #fffbe6;
     }
 
     .sponsored-label {
       position: absolute;
       top: -12px;
-      left: 10px;
+      left: 15px;
       background: gold;
-      color: black;
-      padding: 2px 8px;
-      font-size: 12px;
-      font-weight: bold;
-      border-radius: 4px;
-      box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+      color: #222;
+      padding: 4px 12px;
+      font-size: 13px;
+      font-weight: 700;
+      border-radius: 20px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
     }
 
     .post img {
       max-width: 100%;
-      border-radius: 6px;
-      margin-top: 10px;
+      border-radius: 10px;
+      margin-top: 12px;
+      object-fit: cover;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      user-select: none;
     }
 
     .caption {
-      margin-top: 10px;
+      margin-top: 14px;
+      font-size: 15px;
+      line-height: 1.4;
+      color: #444;
     }
 
     .username {
-      font-weight: bold;
-      margin-right: 5px;
+      font-weight: 700;
+      margin-right: 8px;
+      color: #222;
     }
 
     .subtext {
-      font-size: 12px;
-      color: #666;
-      margin-top: 5px;
+      font-size: 13px;
+      color: #888;
+      margin-top: 8px;
+      font-style: italic;
+    }
+
+    @media (max-width: 640px) {
+      body {
+        padding: 15px 10px;
+      }
+      .container {
+        padding: 15px;
+      }
+      .caption {
+        font-size: 14px;
+      }
+      .subtext {
+        font-size: 12px;
+      }
     }
   </style>
 </head>
@@ -65,7 +106,7 @@
   <!-- Sponsored Post -->
   <div class="post sponsored-post">
     <div class="sponsored-label">Sponsored Post</div>
-    <img src="https://i.imgur.com/qx9zzYF.jpeg" alt="Beach">
+    <img src="https://i.imgur.com/qx9zzYF.jpeg?v=2" alt="Beach" />
     <div class="caption">
       <span class="username">2 and a half men</span>#Gezocht: 1 vrouw die écht nul grenzen heeft.
     </div>
@@ -73,7 +114,7 @@
   </div> 
   
   <div class="post">
-    <img src="https://i.imgur.com/Oqa40WT.jpeg" alt="Beach">
+    <img src="https://i.imgur.com/Oqa40WT.jpeg?v=2" alt="Beach" />
     <div class="caption">
       <span class="username">Grenzeloesoe</span>#Missed #Connection. Who knows this guy I met last week?
     </div>
@@ -81,14 +122,14 @@
   </div> 
   
   <div class="post">
-    <img src="https://i.imgur.com/cT2oiwi.png" alt="Beach">
+    <img src="https://i.imgur.com/cT2oiwi.png?v=2" alt="Beach" />
     <div class="caption">
       <span class="username">Nul Grenzen</span>Looking for hot men from Suriname
     </div>
   </div>
 
   <div class="post">
-    <img src="https://m.media-amazon.com/images/I/71zaHr96UjL._AC_SX679_.jpg" alt="Beach">
+    <img src="https://m.media-amazon.com/images/I/71zaHr96UjL._AC_SX679_.jpg?v=2" alt="Beach" />
     <div class="caption">
       <span class="username">No Money no Grenzen</span>Can we live here please 🌊🏖️
     </div>
@@ -96,6 +137,7 @@
   </div>
 
 </div>
+
 <script>
   if ('serviceWorker' in navigator) {
     navigator.serviceWorker.getRegistrations().then(function(registrations) {
