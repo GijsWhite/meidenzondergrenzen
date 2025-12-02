@@ -3,11 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Content Template - Ad Ready</title>
+    <title>Optimal Ads - Ad Template</title>
     <style>
         /* ========================================
            AD MOCKUP CONFIGURATION
-           Change these URLs to update all ad mockups at once
            ======================================== */
         :root {
             --ad-desktop-leaderboard: none;
@@ -15,11 +14,13 @@
             --ad-desktop-bottom-expanded: none;
             --ad-desktop-sidebar-large: none;
             --ad-desktop-sidebar-small: none;
+            --ad-desktop-side-skyscraper: none;
+            --ad-desktop-incontent: none;
+            --ad-desktop-video: none;
             --ad-mobile-bottom-collapsed: none;
             --ad-mobile-bottom-expanded: none;
             --ad-mobile-inline: none;
-            
-            /* Orange fallback color for empty ads */
+            --ad-mobile-video: none;
             --ad-fallback-color: #f97316;
         }
         
@@ -30,7 +31,7 @@
         }
 
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
             line-height: 1.6;
             color: #333;
             background-color: #f5f5f5;
@@ -38,26 +39,40 @@
 
         .view-toggle {
             position: fixed;
-            top: 20px;
-            right: 20px;
+            right: 30px;
+            top: 50%;
+            transform: translateY(-50%);
             z-index: 1000;
-            background: #2563eb;
-            color: white;
-            border: none;
-            padding: 12px 24px;
-            border-radius: 8px;
+            background: white;
+            color: #1a1a1a;
+            border: 2px solid #e5e7eb;
+            padding: 12px 16px;
+            border-radius: 12px;
             cursor: pointer;
-            font-size: 14px;
-            font-weight: 600;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            transition: background 0.3s;
+            font-size: 24px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s;
+            width: 56px;
+            height: 56px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
         .view-toggle:hover {
-            background: #1d4ed8;
+            background: #f9fafb;
+            border-color: #d1d5db;
         }
 
-        /* Desktop View */
+        .container {
+            max-width: 100%;
+            width: 100%;
+            margin: 0 auto;
+            background: white;
+            min-height: 100vh;
+            position: relative;
+        }
+
         .desktop-wrapper {
             display: block;
         }
@@ -66,34 +81,74 @@
             display: none;
         }
 
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
+        .site-nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 18px 50px;
             background: white;
-            min-height: 100vh;
-            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            border-bottom: 1px solid #f3f4f6;
         }
 
-        /* Header */
-        .site-title {
-            text-align: center;
-            padding: 60px 20px 30px;
-            background: white;
+        .site-logo {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: #1a1a1a;
+            letter-spacing: -0.8px;
+        }
+
+        .site-menu {
+            display: flex;
+            gap: 40px;
+            list-style: none;
+        }
+
+        .site-menu li a {
+            color: #6b7280;
+            text-decoration: none;
+            font-size: 0.95rem;
+            font-weight: 500;
+            transition: color 0.2s;
+            position: relative;
+        }
+
+        .site-menu li a:hover {
             color: #1a1a1a;
         }
 
-        .site-title h1 {
-            font-size: 2.5rem;
-            font-weight: 700;
-            letter-spacing: -0.5px;
+        .site-menu li a::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: #1a1a1a;
+            transition: width 0.2s;
+        }
+
+        .site-menu li a:hover::after {
+            width: 100%;
         }
 
         .header-image {
-            width: 100%;
+            width: calc(100% - 640px);
             height: 400px;
-            display: block;
             background: linear-gradient(135deg, #e0e7ff 0%, #f3e8ff 50%, #fce7f3 100%);
             position: relative;
+            margin: 10px auto 0;
+        }
+
+        @media (max-width: 1800px) {
+            .header-image { width: calc(100% - 440px); }
+        }
+
+        @media (max-width: 1600px) {
+            .header-image { width: calc(100% - 360px); }
+        }
+
+        @media (max-width: 1400px) {
+            .header-image { width: calc(100% - 280px); }
         }
 
         .header-image::before {
@@ -105,15 +160,63 @@
             bottom: 0;
             background-image: 
                 radial-gradient(circle at 20% 30%, rgba(147, 197, 253, 0.3) 0%, transparent 50%),
-                radial-gradient(circle at 80% 70%, rgba(196, 181, 253, 0.3) 0%, transparent 50%),
-                radial-gradient(circle at 50% 50%, rgba(251, 207, 232, 0.2) 0%, transparent 50%);
+                radial-gradient(circle at 80% 70%, rgba(196, 181, 253, 0.3) 0%, transparent 50%);
         }
 
-        /* Desktop Content Layout */
+        .ad-side-skyscraper {
+            position: fixed;
+            top: 82px;
+            width: 300px;
+            height: calc(100vh - 82px);
+            background-color: var(--ad-fallback-color);
+            background-image: var(--ad-desktop-side-skyscraper);
+            background-size: cover;
+            z-index: 10;
+        }
+
+        .ad-side-skyscraper.left { left: 0; }
+        .ad-side-skyscraper.right { right: 0; }
+
+        body.scrolled .ad-side-skyscraper {
+            top: 0;
+            height: 100vh;
+        }
+
+        @media (max-width: 1800px) { .ad-side-skyscraper { width: 200px; } }
+        @media (max-width: 1600px) { .ad-side-skyscraper { width: 160px; } }
+        @media (max-width: 1400px) { .ad-side-skyscraper { width: 120px; } }
+
+        body.mobile-mode .ad-side-skyscraper { display: none; }
+
         .content-wrapper {
             display: flex;
             gap: 30px;
             padding: 40px;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding-left: max(340px, calc((100vw - 1400px) / 2 + 340px));
+            padding-right: max(340px, calc((100vw - 1400px) / 2 + 340px));
+        }
+
+        @media (max-width: 1800px) {
+            .content-wrapper {
+                padding-left: max(240px, calc((100vw - 1400px) / 2 + 240px));
+                padding-right: max(240px, calc((100vw - 1400px) / 2 + 240px));
+            }
+        }
+
+        @media (max-width: 1600px) {
+            .content-wrapper {
+                padding-left: max(200px, calc((100vw - 1400px) / 2 + 200px));
+                padding-right: max(200px, calc((100vw - 1400px) / 2 + 200px));
+            }
+        }
+
+        @media (max-width: 1400px) {
+            .content-wrapper {
+                padding-left: 160px;
+                padding-right: 160px;
+            }
         }
 
         .main-content {
@@ -138,6 +241,9 @@
             width: 300px;
             flex-shrink: 0;
         }
+
+        @media (max-width: 1600px) { .sidebar { width: 250px; } }
+        @media (max-width: 1400px) { .sidebar { width: 220px; } }
 
         .sidebar-block {
             background: #f7fafc;
@@ -167,17 +273,9 @@
             transition: background 0.3s;
         }
 
-        .sidebar-button:hover {
-            background: #3182ce;
-        }
-
-        .sidebar-button.secondary {
-            background: #48bb78;
-        }
-
-        .sidebar-button.secondary:hover {
-            background: #38a169;
-        }
+        .sidebar-button:hover { background: #3182ce; }
+        .sidebar-button.secondary { background: #48bb78; }
+        .sidebar-button.secondary:hover { background: #38a169; }
 
         .sidebar-links {
             list-style: none;
@@ -191,7 +289,6 @@
             color: #4299e1;
             text-decoration: none;
             font-size: 0.95rem;
-            transition: color 0.3s;
         }
 
         .sidebar-links a:hover {
@@ -199,25 +296,33 @@
             text-decoration: underline;
         }
 
-        /* ========================================
-           DESKTOP AD STYLES
-           ======================================== */
-        
-        /* Leaderboard under header */
         .ad-desktop-leaderboard {
-            width: 970px;
+            width: calc(100% - 600px); /* 100% minus both sidebar ads (300px each) */
             height: 250px;
             margin: 30px auto;
             background-color: var(--ad-fallback-color);
             background-image: var(--ad-desktop-leaderboard);
             background-size: cover;
-            background-position: center;
-            display: flex;
-            align-items: center;
-            justify-content: center;
         }
 
-        /* Bottom sticky banner */
+        @media (max-width: 1800px) {
+            .ad-desktop-leaderboard {
+                width: calc(100% - 400px); /* 100% minus both sidebar ads (200px each) */
+            }
+        }
+
+        @media (max-width: 1600px) {
+            .ad-desktop-leaderboard {
+                width: calc(100% - 320px); /* 100% minus both sidebar ads (160px each) */
+            }
+        }
+
+        @media (max-width: 1400px) {
+            .ad-desktop-leaderboard {
+                width: calc(100% - 240px); /* 100% minus both sidebar ads (120px each) */
+            }
+        }
+
         .ad-desktop-bottom-sticky {
             position: fixed;
             bottom: 0;
@@ -228,7 +333,6 @@
             background-color: var(--ad-fallback-color);
             background-image: var(--ad-desktop-bottom-collapsed);
             background-size: cover;
-            background-position: center;
             z-index: 999;
             transition: height 0.3s ease, background-image 0.3s ease;
             box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.15);
@@ -240,28 +344,66 @@
             background-image: var(--ad-desktop-bottom-expanded);
         }
 
-        /* Sidebar ads */
         .ad-sidebar-large {
-            width: 300px;
+            width: 100%;
+            max-width: 300px;
             height: 600px;
             background-color: var(--ad-fallback-color);
             background-image: var(--ad-desktop-sidebar-large);
             background-size: cover;
-            background-position: center;
             margin-bottom: 20px;
         }
 
         .ad-sidebar-small {
-            width: 300px;
+            width: 100%;
+            max-width: 300px;
             height: 250px;
             background-color: var(--ad-fallback-color);
             background-image: var(--ad-desktop-sidebar-small);
             background-size: cover;
-            background-position: center;
             margin-bottom: 20px;
         }
 
-        /* Mobile View with Phone Frame */
+        @media (max-width: 1600px) {
+            .ad-sidebar-large, .ad-sidebar-small { max-width: 250px; }
+        }
+
+        @media (max-width: 1400px) {
+            .ad-sidebar-large, .ad-sidebar-small { max-width: 220px; }
+        }
+
+        .ad-desktop-incontent {
+            width: 100%;
+            max-width: 700px;
+            height: 350px;
+            background-color: var(--ad-fallback-color);
+            background-image: var(--ad-desktop-incontent);
+            background-size: cover;
+            margin: 30px auto;
+        }
+
+        .ad-video {
+            width: 100%;
+            max-width: 700px;
+            height: 394px;
+            background-color: var(--ad-fallback-color);
+            background-image: var(--ad-desktop-video);
+            background-size: cover;
+            margin: 30px auto;
+            position: relative;
+        }
+
+        .ad-video::before {
+            content: '▶';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 48px;
+            color: white;
+            opacity: 0.8;
+        }
+
         body.mobile-mode {
             background: #e5e7eb;
         }
@@ -285,11 +427,11 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            background: transparent;
-            z-index: 100; /* Higher than mobile ad */
+            isolation: isolate;
+            clip-path: inset(0 round 45px);
         }
 
-        .phone-frame::before {
+        .phone-frame::after {
             content: '';
             position: absolute;
             top: 0;
@@ -299,13 +441,10 @@
             border: 12px solid #1a1a1a;
             border-radius: 45px;
             pointer-events: none;
-            box-shadow: 
-                inset 0 0 0 2px #333,
-                0 10px 30px rgba(0, 0, 0, 0.3);
-            z-index: 100; /* Higher than mobile ad */
+            box-shadow: inset 0 0 0 2px #333, 0 10px 30px rgba(0, 0, 0, 0.3);
+            z-index: 300;
         }
 
-        /* Power button */
         .phone-frame .power-button {
             position: absolute;
             right: -4px;
@@ -314,10 +453,9 @@
             height: 60px;
             background: #1a1a1a;
             border-radius: 2px 0 0 2px;
-            z-index: 100; /* Higher than mobile ad */
+            z-index: 300;
         }
 
-        /* Volume buttons */
         .phone-frame .volume-up {
             position: absolute;
             left: -4px;
@@ -326,7 +464,7 @@
             height: 35px;
             background: #1a1a1a;
             border-radius: 0 2px 2px 0;
-            z-index: 100; /* Higher than mobile ad */
+            z-index: 300;
         }
 
         .phone-frame .volume-down {
@@ -337,7 +475,7 @@
             height: 35px;
             background: #1a1a1a;
             border-radius: 0 2px 2px 0;
-            z-index: 100; /* Higher than mobile ad */
+            z-index: 300;
         }
 
         .phone-screen {
@@ -348,27 +486,36 @@
             overflow: hidden;
             overflow-y: auto;
             position: relative;
-            z-index: 1; /* Base layer for content */
+            z-index: 300;
+        }
+
+        .phone-screen::-webkit-scrollbar {
+            width: 4px;
+        }
+
+        .phone-screen::-webkit-scrollbar-thumb {
+            background: #cbd5e0;
+            border-radius: 2px;
         }
 
         .mobile-header {
-            padding: 30px 20px 20px;
+            padding: 18px 20px;
             background: white;
-            color: #1a1a1a;
-            text-align: center;
+            border-bottom: 1px solid #f3f4f6;
         }
 
-        .mobile-header h1 {
-            font-size: 1.8rem;
+        .mobile-logo {
+            font-size: 1.2rem;
             font-weight: 700;
-            letter-spacing: -0.5px;
+            letter-spacing: -0.6px;
+            text-align: center;
         }
 
         .mobile-header-image {
             width: 100%;
             height: 250px;
-            display: block;
             background: linear-gradient(135deg, #e0e7ff 0%, #f3e8ff 50%, #fce7f3 100%);
+            margin-top: 5px;
             position: relative;
         }
 
@@ -444,31 +591,26 @@
             font-size: 0.95rem;
         }
 
-        /* ========================================
-           MOBILE AD STYLES
-           ======================================== */
-        
-        /* Mobile bottom sticky - positioned at bottom of phone screen content */
         .ad-mobile-bottom-sticky {
             display: none;
         }
 
         body.mobile-mode .ad-mobile-bottom-sticky {
             display: block;
-            position: absolute;
+            position: sticky;
             bottom: 0;
-            left: 50%;
-            transform: translateX(-50%);
             width: 320px;
-            height: 180px;
+            height: 130px;
             background-color: var(--ad-fallback-color);
             background-image: var(--ad-mobile-bottom-collapsed);
             background-size: cover;
-            background-position: center;
-            z-index: 50; /* Above content (1), below phone frame border (100) */
+            z-index: 200;
             transition: all 0.3s ease;
             box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.15);
             border-radius: 8px 8px 0 0;
+            margin-left: auto;
+            margin-right: auto;
+            margin-top: auto;
         }
 
         body.mobile-mode .ad-mobile-bottom-sticky:hover,
@@ -478,76 +620,84 @@
             background-image: var(--ad-mobile-bottom-expanded);
         }
 
-        /* Mobile inline ad */
         .ad-mobile-inline {
             width: 300px;
             height: 600px;
             background-color: var(--ad-fallback-color);
             background-image: var(--ad-mobile-inline);
             background-size: cover;
-            background-position: center;
             margin: 20px auto;
         }
 
-        /* Hide desktop ads in mobile mode */
+        .ad-mobile-video {
+            width: 100%;
+            max-width: 320px;
+            height: 180px;
+            background-color: var(--ad-fallback-color);
+            background-image: var(--ad-mobile-video);
+            background-size: cover;
+            margin: 20px auto;
+            position: relative;
+        }
+
+        .ad-mobile-video::before {
+            content: '▶';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 36px;
+            color: white;
+            opacity: 0.8;
+        }
+
         body.mobile-mode .ad-desktop-leaderboard,
         body.mobile-mode .ad-desktop-bottom-sticky {
             display: none;
         }
-
-        /* Scrollbar styling for phone */
-        .phone-screen::-webkit-scrollbar {
-            width: 4px;
-        }
-
-        .phone-screen::-webkit-scrollbar-track {
-            background: transparent;
-        }
-
-        .phone-screen::-webkit-scrollbar-thumb {
-            background: #cbd5e0;
-            border-radius: 2px;
-        }
     </style>
 </head>
 <body>
-    <button class="view-toggle" onclick="toggleView()">Switch to Mobile View</button>
+    <button class="view-toggle" onclick="toggleView()">
+        <span id="view-icon">💻</span>
+    </button>
 
-    <!-- Desktop View -->
+    <div class="ad-side-skyscraper left"></div>
+    <div class="ad-side-skyscraper right"></div>
+
     <div class="desktop-wrapper">
         <div class="container">
-            <div class="site-title">
-                <h1>Optimal Ad Experience</h1>
-            </div>
+            <nav class="site-nav">
+                <div class="site-logo">Optimal Ads</div>
+                <ul class="site-menu">
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">About</a></li>
+                    <li><a href="#">Services</a></li>
+                    <li><a href="#">Contact</a></li>
+                </ul>
+            </nav>
 
             <div class="header-image"></div>
-
-            <!-- Desktop Leaderboard Ad -->
             <div class="ad-desktop-leaderboard"></div>
 
             <div class="content-wrapper">
                 <main class="main-content">
                     <h2>Welcome to Our Content Template</h2>
-                    
                     <p>This is the main content area where your primary article or page content will be displayed. This template is designed with ad placements in mind, providing clear content blocks that can accommodate various advertising formats without disrupting the user experience.</p>
-
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
-
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
                     <p>The layout features a flexible main content column that adapts well to different content lengths and types. Whether you're publishing articles, blog posts, product descriptions, or any other form of content, this structure provides the foundation for effective content delivery alongside strategic ad placement.</p>
-
-                    <p>Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.</p>
-
+                    <p>Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam.</p>
+                    
+                    <div class="ad-desktop-incontent"></div>
+                    
                     <p>This template provides clear visual hierarchy and proper spacing to ensure readability while leaving strategic spaces for advertising units. The design follows modern web standards and best practices for both user experience and monetization potential.</p>
-
-                    <p>Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem.</p>
-
-                    <p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga.</p>
-
-                    <p>Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere possimus, omnis voluptas assumenda est, omnis dolor repellendus.</p>
-
-                    <p>Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet ut et voluptates repudiandae sint et molestiae non recusandae. Itaque earum rerum hic tenetur a sapiente delectus, ut aut reiciendis voluptatibus maiores alias consequatur aut perferendis doloribus asperiores repellat.</p>
-
-                    <p>The strategic placement of advertising elements throughout this template ensures maximum visibility while maintaining content integrity. Users can engage with your content naturally while advertisers benefit from premium positioning and high viewability rates across all major ad formats and sizes.</p>
+                    <p>Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt.</p>
+                    <p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident.</p>
+                    <p>Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere possimus.</p>
+                    <p>Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet ut et voluptates repudiandae sint et molestiae non recusandae.</p>
+                    <p>The strategic placement of advertising elements throughout this template ensures maximum visibility while maintaining content integrity.</p>
+                    
+                    <div class="ad-video"></div>
                 </main>
 
                 <aside class="sidebar">
@@ -557,7 +707,6 @@
                         <a href="#" class="sidebar-button secondary">Secondary Action</a>
                         <a href="#" class="sidebar-button">Get Started</a>
                     </div>
-
                     <div class="sidebar-block">
                         <h3>Related Content</h3>
                         <ul class="sidebar-links">
@@ -566,86 +715,66 @@
                             <li><a href="#">Monetization Strategies</a></li>
                             <li><a href="#">Mobile Optimization Guide</a></li>
                             <li><a href="#">Content Strategy Tips</a></li>
-                            <li><a href="#">User Experience Basics</a></li>
                         </ul>
                     </div>
-
-                    <!-- Sidebar Large Ad -->
                     <div class="ad-sidebar-large"></div>
-
                     <div class="sidebar-block">
                         <h3>Resources</h3>
                         <ul class="sidebar-links">
                             <li><a href="#">Documentation</a></li>
                             <li><a href="#">API Reference</a></li>
                             <li><a href="#">Community Forum</a></li>
-                            <li><a href="#">Support Center</a></li>
                         </ul>
                     </div>
-
-                    <!-- Sidebar Small Ad -->
                     <div class="ad-sidebar-small"></div>
                 </aside>
             </div>
         </div>
-
-        <!-- Desktop Bottom Sticky Ad -->
         <div class="ad-desktop-bottom-sticky"></div>
     </div>
 
-    <!-- Mobile View with Phone Frame -->
     <div class="mobile-wrapper">
         <div class="phone-frame">
-            <div class="power-button"></div>
-            <div class="volume-up"></div>
-            <div class="volume-down"></div>
             <div class="phone-screen">
                 <div class="mobile-header">
-                    <h1>Optimal Ad Experience</h1>
+                    <div class="mobile-logo">Optimal Ads</div>
                 </div>
-
                 <div class="mobile-header-image"></div>
-
                 <div class="mobile-content">
                     <h2>Welcome to Our Content Template</h2>
-                    
                     <p>This is the mobile-optimized version of your content. The layout adapts to smaller screens with a single-column design that prioritizes readability and ease of navigation.</p>
-
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Mobile users appreciate concise, scannable content that gets to the point quickly.</p>
-
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mobile users appreciate concise, scannable content that gets to the point quickly.</p>
                     <p>The mobile layout stacks content vertically, making it easy to scroll through articles while maintaining clear visual separation between different content blocks and ad units.</p>
-
-                    <!-- Mobile Inline Ad after 3rd paragraph -->
+                    
                     <div class="ad-mobile-inline"></div>
-
-                    <p>This template ensures that your content remains accessible and engaging regardless of the device your visitors are using. The responsive design principles applied here form the foundation for effective mobile advertising integration.</p>
-
-                    <p>Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. The mobile experience is optimized for touch interactions and thumb-friendly navigation.</p>
-
-                    <p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident.</p>
-
-                    <p>Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet ut et voluptates repudiandae sint et molestiae non recusandae.</p>
+                    
+                    <p>This template ensures that your content remains accessible and engaging regardless of the device your visitors are using.</p>
+                    <p>Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                    <p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti.</p>
+                    <p>Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi optio.</p>
+                    <p>Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet ut et voluptates repudiandae sint.</p>
+                    <p>The strategic placement of advertising elements throughout this template ensures maximum visibility while maintaining content integrity.</p>
+                    
+                    <div class="ad-mobile-video"></div>
                 </div>
-
                 <div class="mobile-sidebar">
                     <h3>Quick Actions</h3>
                     <a href="#" class="mobile-sidebar-button">Primary Action</a>
                     <a href="#" class="mobile-sidebar-button secondary">Secondary Action</a>
-
                     <h3 style="margin-top: 20px;">Related Links</h3>
                     <ul class="mobile-sidebar-links">
                         <li><a href="#">Introduction to Web Design</a></li>
                         <li><a href="#">Mobile Optimization Guide</a></li>
                         <li><a href="#">Content Strategy Tips</a></li>
                         <li><a href="#">Documentation</a></li>
-                        <li><a href="#">Support Center</a></li>
                     </ul>
                 </div>
+                <div class="ad-mobile-bottom-sticky"></div>
             </div>
+            <div class="power-button"></div>
+            <div class="volume-up"></div>
+            <div class="volume-down"></div>
         </div>
-
-        <!-- Mobile Bottom Sticky Ad - positioned at bottom of phone frame -->
-        <div class="ad-mobile-bottom-sticky"></div>
     </div>
 
     <script>
@@ -657,70 +786,59 @@
         function toggleView() {
             isMobile = !isMobile;
             document.body.classList.toggle('mobile-mode', isMobile);
-            
-            const button = document.querySelector('.view-toggle');
-            button.textContent = isMobile ? 'Switch to Desktop View' : 'Switch to Mobile View';
+            document.getElementById('view-icon').textContent = isMobile ? '📱' : '💻';
         }
 
-        // Desktop sticky ad scroll behavior
         window.addEventListener('scroll', function() {
             const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
             const desktopStickyAd = document.querySelector('.ad-desktop-bottom-sticky');
             
+            if (scrollTop > 82) {
+                document.body.classList.add('scrolled');
+            } else {
+                document.body.classList.remove('scrolled');
+            }
+            
             if (desktopStickyAd && !isMobile) {
-                // Clear existing timeout
                 clearTimeout(desktopScrollTimeout);
                 
-                // Expand when scrolling down past 500px
                 if (scrollTop > 500 && scrollTop > lastScrollTop) {
                     desktopStickyAd.classList.add('expanded');
-                }
-                // Collapse when scrolling up
-                else if (scrollTop < lastScrollTop) {
+                } else if (scrollTop < lastScrollTop) {
                     desktopStickyAd.classList.remove('expanded');
                 }
                 
-                // Auto-collapse after 3 seconds of no scrolling
                 if (scrollTop > 500) {
                     desktopScrollTimeout = setTimeout(function() {
                         desktopStickyAd.classList.remove('expanded');
                     }, 3000);
                 }
             }
-
             lastScrollTop = scrollTop;
         });
 
-        // Mobile sticky ad scroll behavior (when in phone preview)
         const phoneScreen = document.querySelector('.phone-screen');
         if (phoneScreen) {
             let lastPhoneScrollTop = 0;
-            
             phoneScreen.addEventListener('scroll', function() {
                 const mobileStickyAd = document.querySelector('.ad-mobile-bottom-sticky');
                 const phoneScrollTop = phoneScreen.scrollTop;
                 
                 if (mobileStickyAd && isMobile) {
-                    // Clear existing timeout
                     clearTimeout(mobileScrollTimeout);
                     
-                    // Expand when scrolling down past 500px
                     if (phoneScrollTop > 500 && phoneScrollTop > lastPhoneScrollTop) {
                         mobileStickyAd.classList.add('expanded');
-                    }
-                    // Collapse when scrolling up
-                    else if (phoneScrollTop < lastPhoneScrollTop) {
+                    } else if (phoneScrollTop < lastPhoneScrollTop) {
                         mobileStickyAd.classList.remove('expanded');
                     }
                     
-                    // Auto-collapse after 3 seconds of no scrolling
                     if (phoneScrollTop > 500) {
                         mobileScrollTimeout = setTimeout(function() {
                             mobileStickyAd.classList.remove('expanded');
                         }, 3000);
                     }
                 }
-                
                 lastPhoneScrollTop = phoneScrollTop;
             });
         }
