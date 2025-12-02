@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Content Template - Ad Ready</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f5f5f5;
+        }
+
+        .view-toggle {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
+            background: #2563eb;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 600;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: background 0.3s;
+        }
+
+        .view-toggle:hover {
+            background: #1d4ed8;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            min-height: 100vh;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Desktop Layout */
+        .desktop-view {
+            display: block;
+        }
+
+        .mobile-view {
+            display: none;
+        }
+
+        /* Header */
+        .site-title {
+            text-align: center;
+            padding: 40px 20px 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .site-title h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+
+        .site-title p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        .header-image {
+            width: 100%;
+            height: 400px;
+            object-fit: cover;
+            display: block;
+        }
+
+        /* Desktop Content Layout */
+        .content-wrapper {
+            display: flex;
+            gap: 30px;
+            padding: 40px;
+        }
+
+        .main-content {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .main-content h2 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+            color: #1a202c;
+        }
+
+        .main-content p {
+            margin-bottom: 20px;
+            font-size: 1.05rem;
+            color: #4a5568;
+            text-align: justify;
+        }
+
+        .sidebar {
+            width: 300px;
+            flex-shrink: 0;
+        }
+
+        .sidebar-block {
+            background: #f7fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+
+        .sidebar-block h3 {
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+            color: #2d3748;
+        }
+
+        .sidebar-button {
+            display: block;
+            width: 100%;
+            padding: 12px 20px;
+            margin-bottom: 10px;
+            background: #4299e1;
+            color: white;
+            text-align: center;
+            text-decoration: none;
+            border-radius: 6px;
+            font-weight: 600;
+            transition: background 0.3s;
+        }
+
+        .sidebar-button:hover {
+            background: #3182ce;
+        }
+
+        .sidebar-button.secondary {
+            background: #48bb78;
+        }
+
+        .sidebar-button.secondary:hover {
+            background: #38a169;
+        }
+
+        .sidebar-links {
+            list-style: none;
+        }
+
+        .sidebar-links li {
+            margin-bottom: 10px;
+        }
+
+        .sidebar-links a {
+            color: #4299e1;
+            text-decoration: none;
+            font-size: 0.95rem;
+            transition: color 0.3s;
+        }
+
+        .sidebar-links a:hover {
+            color: #2b6cb0;
+            text-decoration: underline;
+        }
+
+        /* Mobile Layout */
+        body.mobile-mode .desktop-view {
+            display: none;
+        }
+
+        body.mobile-mode .mobile-view {
+            display: block;
+        }
+
+        body.mobile-mode .container {
+            max-width: 100%;
+        }
+
+        /* iPhone Mockup */
+        body.mobile-mode {
+            background: #e5e7eb;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            min-height: 100vh;
+        }
+
+        body.mobile-mode .container {
+            width: 375px;
+            height: 700px;
+            background: white;
+            position: relative;
+            background-image: url('phone-frame.png');
+            background-size: 100% 100%;
+            background-repeat: no-repeat;
+            background-position: center;
+            padding: 15px;
+        }
+
+        /* iPhone Screen Content Area */
+        body.mobile-mode .mobile-view {
+            height: 100%;
+            width: 100%;
+            overflow-y: auto;
+            overflow-x: hidden;
+            border-radius: 35px;
+            background: white;
+        }
+
+        /* Adjust scrollbar for iPhone mockup */
+        body.mobile-mode .mobile-view::-webkit-scrollbar {
+            width: 4px;
+        }
+
+        body.mobile-mode .mobile-view::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        body.mobile-mode .mobile-view::-webkit-scrollbar-thumb {
+            background: #cbd5e0;
+            border-radius: 2px;
+        }
+
+        .mobile-header {
+            padding: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .mobile-header h1 {
+            font-size: 1.8rem;
+            margin-bottom: 8px;
+        }
+
+        .mobile-header p {
+            font-size: 0.95rem;
+            opacity: 0.9;
+        }
+
+        .mobile-header-image {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            display: block;
+        }
+
+        .mobile-content {
+            padding: 20px;
+        }
+
+        .mobile-content h2 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: #1a202c;
+        }
+
+        .mobile-content p {
+            margin-bottom: 15px;
+            font-size: 1rem;
+            color: #4a5568;
+        }
+
+        .mobile-sidebar {
+            padding: 20px;
+            background: #f7fafc;
+            border-top: 1px solid #e2e8f0;
+        }
+
+        .mobile-sidebar h3 {
+            font-size: 1.2rem;
+            margin-bottom: 12px;
+            color: #2d3748;
+        }
+
+        .mobile-sidebar-button {
+            display: block;
+            width: 100%;
+            padding: 12px 20px;
+            margin-bottom: 10px;
+            background: #4299e1;
+            color: white;
+            text-align: center;
+            text-decoration: none;
+            border-radius: 6px;
+            font-weight: 600;
+        }
+
+        .mobile-sidebar-button.secondary {
+            background: #48bb78;
+        }
+
+        .mobile-sidebar-links {
+            list-style: none;
+            margin-top: 15px;
+        }
+
+        .mobile-sidebar-links li {
+            margin-bottom: 10px;
+        }
+
+        .mobile-sidebar-links a {
+            color: #4299e1;
+            text-decoration: none;
+            font-size: 0.95rem;
+        }
+    </style>
+</head>
+<body>
+    <button class="view-toggle" onclick="toggleView()">Switch to Mobile View</button>
+
+    <div class="container">
+        <!-- Desktop View -->
+        <div class="desktop-view">
+            <div class="site-title">
+                <h1>Your Website Title Here</h1>
+                <p>A compelling tagline or subtitle goes here</p>
+            </div>
+
+            <img src="https://images.unsplash.com/photo-1557683316-973673baf926?w=1200&h=400&fit=crop" alt="Header Image" class="header-image">
+
+            <div class="content-wrapper">
+                <main class="main-content">
+                    <h2>Welcome to Our Content Template</h2>
+                    
+                    <p>This is the main content area where your primary article or page content will be displayed. This template is designed with ad placements in mind, providing clear content blocks that can accommodate various advertising formats without disrupting the user experience.</p>
+
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
+
+                    <p>The layout features a flexible main content column that adapts well to different content lengths and types. Whether you're publishing articles, blog posts, product descriptions, or any other form of content, this structure provides the foundation for effective content delivery alongside strategic ad placement.</p>
+
+                    <p>Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.</p>
+
+                    <p>This template provides clear visual hierarchy and proper spacing to ensure readability while leaving strategic spaces for advertising units. The design follows modern web standards and best practices for both user experience and monetization potential.</p>
+
+                    <p>Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem.</p>
+                </main>
+
+                <aside class="sidebar">
+                    <div class="sidebar-block">
+                        <h3>Quick Actions</h3>
+                        <a href="#" class="sidebar-button">Primary Action</a>
+                        <a href="#" class="sidebar-button secondary">Secondary Action</a>
+                        <a href="#" class="sidebar-button">Get Started</a>
+                    </div>
+
+                    <div class="sidebar-block">
+                        <h3>Related Content</h3>
+                        <ul class="sidebar-links">
+                            <li><a href="#">Introduction to Web Design</a></li>
+                            <li><a href="#">Best Practices for Layouts</a></li>
+                            <li><a href="#">Monetization Strategies</a></li>
+                            <li><a href="#">Mobile Optimization Guide</a></li>
+                            <li><a href="#">Content Strategy Tips</a></li>
+                            <li><a href="#">User Experience Basics</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-block">
+                        <h3>Resources</h3>
+                        <ul class="sidebar-links">
+                            <li><a href="#">Documentation</a></li>
+                            <li><a href="#">API Reference</a></li>
+                            <li><a href="#">Community Forum</a></li>
+                            <li><a href="#">Support Center</a></li>
+                        </ul>
+                    </div>
+                </aside>
+            </div>
+        </div>
+
+        <!-- Mobile View -->
+        <div class="mobile-view">
+            <div class="mobile-header">
+                <h1>Your Website Title</h1>
+                <p>Mobile optimized experience</p>
+            </div>
+
+            <img src="https://images.unsplash.com/photo-1557683316-973673baf926?w=600&h=250&fit=crop" alt="Header Image" class="mobile-header-image">
+
+            <div class="mobile-content">
+                <h2>Welcome to Our Content Template</h2>
+                
+                <p>This is the mobile-optimized version of your content. The layout adapts to smaller screens with a single-column design that prioritizes readability and ease of navigation.</p>
+
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Mobile users appreciate concise, scannable content that gets to the point quickly.</p>
+
+                <p>The mobile layout stacks content vertically, making it easy to scroll through articles while maintaining clear visual separation between different content blocks and ad units.</p>
+
+                <p>This template ensures that your content remains accessible and engaging regardless of the device your visitors are using. The responsive design principles applied here form the foundation for effective mobile advertising integration.</p>
+
+                <p>Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. The mobile experience is optimized for touch interactions and thumb-friendly navigation.</p>
+            </div>
+
+            <div class="mobile-sidebar">
+                <h3>Quick Actions</h3>
+                <a href="#" class="mobile-sidebar-button">Primary Action</a>
+                <a href="#" class="mobile-sidebar-button secondary">Secondary Action</a>
+
+                <h3 style="margin-top: 20px;">Related Links</h3>
+                <ul class="mobile-sidebar-links">
+                    <li><a href="#">Introduction to Web Design</a></li>
+                    <li><a href="#">Mobile Optimization Guide</a></li>
+                    <li><a href="#">Content Strategy Tips</a></li>
+                    <li><a href="#">Documentation</a></li>
+                    <li><a href="#">Support Center</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let isMobile = false;
+
+        function toggleView() {
+            isMobile = !isMobile;
+            document.body.classList.toggle('mobile-mode', isMobile);
+            
+            const button = document.querySelector('.view-toggle');
+            button.textContent = isMobile ? 'Switch to Desktop View' : 'Switch to Mobile View';
+        }
+    </script>
+</body>
+</html>
