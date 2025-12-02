@@ -674,6 +674,130 @@
         body.mobile-mode .ad-desktop-bottom-sticky {
             display: none;
         }
+
+        /* Bottom Content Sections */
+        .bottom-content {
+            margin-top: 60px;
+            padding-top: 40px;
+            border-top: 2px solid #e2e8f0;
+        }
+
+        .bottom-section {
+            margin-bottom: 50px;
+        }
+
+        .bottom-section h3 {
+            font-size: 1.8rem;
+            margin-bottom: 25px;
+            color: #1a202c;
+            font-weight: 700;
+        }
+
+        .comments-section {
+            background: #f7fafc;
+            padding: 30px;
+            border-radius: 8px;
+        }
+
+        .comment {
+            background: white;
+            padding: 20px;
+            margin-bottom: 15px;
+            border-radius: 6px;
+            border-left: 3px solid #4299e1;
+        }
+
+        .comment-author {
+            font-weight: 600;
+            color: #2d3748;
+            margin-bottom: 5px;
+        }
+
+        .comment-date {
+            font-size: 0.85rem;
+            color: #718096;
+            margin-bottom: 10px;
+        }
+
+        .comment-text {
+            color: #4a5568;
+            line-height: 1.6;
+        }
+
+        .related-articles {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+        }
+
+        .article-card {
+            background: white;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            overflow: hidden;
+            transition: transform 0.2s, box-shadow 0.2s;
+            cursor: pointer;
+        }
+
+        .article-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .article-image {
+            width: 100%;
+            height: 180px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+
+        .article-content {
+            padding: 20px;
+        }
+
+        .article-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #2d3748;
+            margin-bottom: 10px;
+        }
+
+        .article-excerpt {
+            font-size: 0.95rem;
+            color: #718096;
+            line-height: 1.5;
+        }
+
+        .read-more {
+            color: #4299e1;
+            font-weight: 600;
+            margin-top: 10px;
+            display: inline-block;
+        }
+
+        /* Mobile bottom content */
+        .mobile-bottom-content {
+            padding: 20px;
+            background: white;
+        }
+
+        .mobile-bottom-content h3 {
+            font-size: 1.4rem;
+            margin-bottom: 20px;
+            color: #1a202c;
+        }
+
+        .mobile-bottom-content .comment {
+            padding: 15px;
+            margin-bottom: 12px;
+        }
+
+        .mobile-bottom-content .article-card {
+            margin-bottom: 15px;
+        }
+
+        .mobile-bottom-content .article-image {
+            height: 150px;
+        }
     </style>
 </head>
 <body>
@@ -717,6 +841,100 @@
                     <p>The strategic placement of advertising elements throughout this template ensures maximum visibility while maintaining content integrity.</p>
                     
                     <div class="ad-video"></div>
+
+                    <!-- Bottom Content Sections -->
+                    <div class="bottom-content">
+                        <!-- Comments Section -->
+                        <div class="bottom-section comments-section">
+                            <h3>Comments (3)</h3>
+                            
+                            <div class="comment">
+                                <div class="comment-author">Sarah Johnson</div>
+                                <div class="comment-date">2 hours ago</div>
+                                <div class="comment-text">Great article! This really helped me understand the topic better. I've been looking for this kind of detailed explanation for a while now.</div>
+                            </div>
+
+                            <div class="comment">
+                                <div class="comment-author">Mike Chen</div>
+                                <div class="comment-date">5 hours ago</div>
+                                <div class="comment-text">Very informative content. The examples provided make it much easier to grasp the concepts. Thanks for sharing!</div>
+                            </div>
+
+                            <div class="comment">
+                                <div class="comment-author">Emma Rodriguez</div>
+                                <div class="comment-date">1 day ago</div>
+                                <div class="comment-text">Excellent write-up! I especially appreciated the practical applications mentioned. Looking forward to more articles like this.</div>
+                            </div>
+                        </div>
+
+                        <!-- Related Articles Section -->
+                        <div class="bottom-section">
+                            <h3>Related Articles</h3>
+                            
+                            <div class="related-articles">
+                                <div class="article-card">
+                                    <div class="article-image"></div>
+                                    <div class="article-content">
+                                        <div class="article-title">Understanding Modern Web Design Principles</div>
+                                        <div class="article-excerpt">Explore the fundamental principles that make modern websites engaging and user-friendly.</div>
+                                        <a href="#" class="read-more">Read More →</a>
+                                    </div>
+                                </div>
+
+                                <div class="article-card">
+                                    <div class="article-image" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);"></div>
+                                    <div class="article-content">
+                                        <div class="article-title">Optimizing Content for Better Engagement</div>
+                                        <div class="article-excerpt">Learn proven strategies to create content that resonates with your audience.</div>
+                                        <a href="#" class="read-more">Read More →</a>
+                                    </div>
+                                </div>
+
+                                <div class="article-card">
+                                    <div class="article-image" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);"></div>
+                                    <div class="article-content">
+                                        <div class="article-title">The Future of Digital Publishing</div>
+                                        <div class="article-excerpt">Discover emerging trends shaping the future of online content creation.</div>
+                                        <a href="#" class="read-more">Read More →</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Read More Section -->
+                        <div class="bottom-section">
+                            <h3>You May Also Like</h3>
+                            
+                            <div class="related-articles">
+                                <div class="article-card">
+                                    <div class="article-image" style="background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);"></div>
+                                    <div class="article-content">
+                                        <div class="article-title">Getting Started with Responsive Layouts</div>
+                                        <div class="article-excerpt">A comprehensive guide to building websites that work seamlessly across all devices.</div>
+                                        <a href="#" class="read-more">Read More →</a>
+                                    </div>
+                                </div>
+
+                                <div class="article-card">
+                                    <div class="article-image" style="background: linear-gradient(135deg, #30cfd0 0%, #330867 100%);"></div>
+                                    <div class="article-content">
+                                        <div class="article-title">Best Practices for Content Strategy</div>
+                                        <div class="article-excerpt">Master the art of planning and executing effective content strategies.</div>
+                                        <a href="#" class="read-more">Read More →</a>
+                                    </div>
+                                </div>
+
+                                <div class="article-card">
+                                    <div class="article-image" style="background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);"></div>
+                                    <div class="article-content">
+                                        <div class="article-title">Analytics and Performance Tracking</div>
+                                        <div class="article-excerpt">Learn how to measure and improve your website's performance metrics.</div>
+                                        <a href="#" class="read-more">Read More →</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </main>
 
                 <aside class="sidebar">
@@ -775,6 +993,60 @@
                     <p>The strategic placement of advertising elements throughout this template ensures maximum visibility while maintaining content integrity.</p>
                     
                     <div class="ad-mobile-video"></div>
+
+                    <!-- Mobile Bottom Content -->
+                    <div class="mobile-bottom-content">
+                        <h3>Comments (3)</h3>
+                        
+                        <div class="comment">
+                            <div class="comment-author">Sarah Johnson</div>
+                            <div class="comment-date">2 hours ago</div>
+                            <div class="comment-text">Great article! This really helped me understand the topic better.</div>
+                        </div>
+
+                        <div class="comment">
+                            <div class="comment-author">Mike Chen</div>
+                            <div class="comment-date">5 hours ago</div>
+                            <div class="comment-text">Very informative content. Thanks for sharing!</div>
+                        </div>
+
+                        <div class="comment">
+                            <div class="comment-author">Emma Rodriguez</div>
+                            <div class="comment-date">1 day ago</div>
+                            <div class="comment-text">Excellent write-up! Looking forward to more articles like this.</div>
+                        </div>
+                    </div>
+
+                    <div class="mobile-bottom-content">
+                        <h3>Related Articles</h3>
+                        
+                        <div class="article-card">
+                            <div class="article-image"></div>
+                            <div class="article-content">
+                                <div class="article-title">Modern Web Design Principles</div>
+                                <div class="article-excerpt">Explore fundamental principles that make modern websites engaging.</div>
+                                <a href="#" class="read-more">Read More →</a>
+                            </div>
+                        </div>
+
+                        <div class="article-card">
+                            <div class="article-image" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);"></div>
+                            <div class="article-content">
+                                <div class="article-title">Content Optimization Strategies</div>
+                                <div class="article-excerpt">Learn proven strategies to create engaging content.</div>
+                                <a href="#" class="read-more">Read More →</a>
+                            </div>
+                        </div>
+
+                        <div class="article-card">
+                            <div class="article-image" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);"></div>
+                            <div class="article-content">
+                                <div class="article-title">Digital Publishing Future</div>
+                                <div class="article-excerpt">Discover emerging trends in online content creation.</div>
+                                <a href="#" class="read-more">Read More →</a>
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <div class="mobile-sidebar">
                     <h3>Quick Actions</h3>
@@ -808,9 +1080,9 @@
             document.getElementById('view-icon').textContent = isMobile ? '📱' : '💻';
         }
 
+        // Sidebar ads stick to top when scrolled
         window.addEventListener('scroll', function() {
             const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-            const desktopStickyAd = document.querySelector('.ad-desktop-bottom-sticky');
             
             if (scrollTop > 82) {
                 document.body.classList.add('scrolled');
@@ -818,48 +1090,55 @@
                 document.body.classList.remove('scrolled');
             }
             
-            if (desktopStickyAd && !isMobile) {
-                clearTimeout(desktopScrollTimeout);
-                
-                if (scrollTop > 500 && scrollTop > lastScrollTop) {
-                    desktopStickyAd.classList.add('expanded');
-                } else if (scrollTop < lastScrollTop) {
-                    desktopStickyAd.classList.remove('expanded');
-                }
-                
-                if (scrollTop > 500) {
-                    desktopScrollTimeout = setTimeout(function() {
-                        desktopStickyAd.classList.remove('expanded');
-                    }, 3000);
-                }
-            }
             lastScrollTop = scrollTop;
         });
 
+        // Desktop sticky ad - expand on hover only, auto-collapse after 2 seconds
+        const desktopStickyAd = document.querySelector('.ad-desktop-bottom-sticky');
+        if (desktopStickyAd) {
+            desktopStickyAd.addEventListener('mouseenter', function() {
+                if (!isMobile) {
+                    clearTimeout(desktopScrollTimeout);
+                    this.classList.add('expanded');
+                    
+                    desktopScrollTimeout = setTimeout(() => {
+                        this.classList.remove('expanded');
+                    }, 2000);
+                }
+            });
+            
+            desktopStickyAd.addEventListener('mouseleave', function() {
+                if (!isMobile) {
+                    clearTimeout(desktopScrollTimeout);
+                    this.classList.remove('expanded');
+                }
+            });
+        }
+
+        // Mobile sticky ad - expand on hover, auto-collapse after 2 seconds
         const phoneScreen = document.querySelector('.phone-screen');
         if (phoneScreen) {
-            let lastPhoneScrollTop = 0;
-            phoneScreen.addEventListener('scroll', function() {
-                const mobileStickyAd = document.querySelector('.ad-mobile-bottom-sticky');
-                const phoneScrollTop = phoneScreen.scrollTop;
+            const mobileStickyAd = document.querySelector('.ad-mobile-bottom-sticky');
+            
+            if (mobileStickyAd) {
+                mobileStickyAd.addEventListener('mouseenter', function() {
+                    if (isMobile) {
+                        clearTimeout(mobileScrollTimeout);
+                        this.classList.add('expanded');
+                        
+                        mobileScrollTimeout = setTimeout(() => {
+                            this.classList.remove('expanded');
+                        }, 2000);
+                    }
+                });
                 
-                if (mobileStickyAd && isMobile) {
-                    clearTimeout(mobileScrollTimeout);
-                    
-                    if (phoneScrollTop > 500 && phoneScrollTop > lastPhoneScrollTop) {
-                        mobileStickyAd.classList.add('expanded');
-                    } else if (phoneScrollTop < lastPhoneScrollTop) {
-                        mobileStickyAd.classList.remove('expanded');
+                mobileStickyAd.addEventListener('mouseleave', function() {
+                    if (isMobile) {
+                        clearTimeout(mobileScrollTimeout);
+                        this.classList.remove('expanded');
                     }
-                    
-                    if (phoneScrollTop > 500) {
-                        mobileScrollTimeout = setTimeout(function() {
-                            mobileStickyAd.classList.remove('expanded');
-                        }, 3000);
-                    }
-                }
-                lastPhoneScrollTop = phoneScrollTop;
-            });
+                });
+            }
         }
     </script>
 </body>
