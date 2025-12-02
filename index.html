@@ -191,14 +191,69 @@
         .phone-frame {
             width: 375px;
             height: 700px;
-            background-image: url('phone-frame.png');
-            background-size: contain;
-            background-repeat: no-repeat;
-            background-position: center;
             position: relative;
             display: flex;
             justify-content: center;
             align-items: center;
+            background: transparent;
+        }
+
+        .phone-frame::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            border: 12px solid #1a1a1a;
+            border-radius: 45px;
+            pointer-events: none;
+            box-shadow: 
+                inset 0 0 0 2px #333,
+                0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .phone-frame::after {
+            content: '';
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 2px;
+            height: 30px;
+            background: #1a1a1a;
+            pointer-events: none;
+        }
+
+        /* Power button */
+        .phone-frame .power-button {
+            position: absolute;
+            right: -4px;
+            top: 120px;
+            width: 4px;
+            height: 60px;
+            background: #1a1a1a;
+            border-radius: 2px 0 0 2px;
+        }
+
+        /* Volume buttons */
+        .phone-frame .volume-up {
+            position: absolute;
+            left: -4px;
+            top: 100px;
+            width: 4px;
+            height: 35px;
+            background: #1a1a1a;
+            border-radius: 0 2px 2px 0;
+        }
+
+        .phone-frame .volume-down {
+            position: absolute;
+            left: -4px;
+            top: 145px;
+            width: 4px;
+            height: 35px;
+            background: #1a1a1a;
+            border-radius: 0 2px 2px 0;
         }
 
         .phone-screen {
@@ -375,6 +430,9 @@
     <!-- Mobile View with Phone Frame -->
     <div class="mobile-wrapper">
         <div class="phone-frame">
+            <div class="power-button"></div>
+            <div class="volume-up"></div>
+            <div class="volume-down"></div>
             <div class="phone-screen">
                 <div class="mobile-header">
                     <h1>Your Website Title</h1>
