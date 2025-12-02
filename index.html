@@ -132,24 +132,12 @@
         }
 
         .header-image {
-            width: calc(100% - 640px);
+            width: calc(100% - 600px - 32px); /* Subtract sidebar ads (300px each) and gaps (16px each side) */
             height: 400px;
             background: linear-gradient(135deg, #e0e7ff 0%, #f3e8ff 50%, #fce7f3 100%);
             position: relative;
             margin: 10px auto 0;
         }
-
-        @media (max-width: 2200px) { .header-image { width: calc(100% - 560px); } }
-        @media (max-width: 2100px) { .header-image { width: calc(100% - 520px); } }
-        @media (max-width: 2000px) { .header-image { width: calc(100% - 480px); } }
-        @media (max-width: 1900px) { .header-image { width: calc(100% - 440px); } }
-        @media (max-width: 1800px) { .header-image { width: calc(100% - 400px); } }
-        @media (max-width: 1700px) { .header-image { width: calc(100% - 360px); } }
-        @media (max-width: 1600px) { .header-image { width: calc(100% - 320px); } }
-        @media (max-width: 1500px) { .header-image { width: calc(100% - 280px); } }
-        @media (max-width: 1400px) { .header-image { width: calc(100% - 240px); } }
-        @media (max-width: 1300px) { .header-image { width: calc(100% - 200px); } }
-        @media (max-width: 1200px) { .header-image { width: calc(100% - 160px); } }
 
         .header-image::before {
             content: '';
@@ -174,26 +162,37 @@
             z-index: 10;
         }
 
-        .ad-side-skyscraper.left { left: 0; }
-        .ad-side-skyscraper.right { right: 0; }
+        .ad-side-skyscraper.left { left: 16px; }
+        .ad-side-skyscraper.right { right: 16px; }
 
         body.scrolled .ad-side-skyscraper {
             top: 0;
             height: 100vh;
         }
 
-        /* Sidebar ads shrink first - before affecting content */
-        @media (max-width: 2200px) { .ad-side-skyscraper { width: 280px; } }
-        @media (max-width: 2100px) { .ad-side-skyscraper { width: 260px; } }
-        @media (max-width: 2000px) { .ad-side-skyscraper { width: 240px; } }
-        @media (max-width: 1900px) { .ad-side-skyscraper { width: 220px; } }
-        @media (max-width: 1800px) { .ad-side-skyscraper { width: 200px; } }
+        /* Sidebar ads shrink based on available space, min 50px */
+        /* Content must stay >= 1000px, leaderboard >= 970px */
+        /* Formula: viewport - content(1000px) - gaps = available for sidebar ads */
+        
+        /* At 1920px: 1920 - 1000 - 32 (gaps) = 888px for ads (444px each) → cap at 300px each */
+        @media (max-width: 1950px) { .ad-side-skyscraper { width: 280px; } }
+        @media (max-width: 1900px) { .ad-side-skyscraper { width: 260px; } }
+        @media (max-width: 1850px) { .ad-side-skyscraper { width: 240px; } }
+        @media (max-width: 1800px) { .ad-side-skyscraper { width: 220px; } }
+        @media (max-width: 1750px) { .ad-side-skyscraper { width: 200px; } }
         @media (max-width: 1700px) { .ad-side-skyscraper { width: 180px; } }
-        @media (max-width: 1600px) { .ad-side-skyscraper { width: 160px; } }
-        @media (max-width: 1500px) { .ad-side-skyscraper { width: 140px; } }
-        @media (max-width: 1400px) { .ad-side-skyscraper { width: 120px; } }
-        @media (max-width: 1300px) { .ad-side-skyscraper { width: 100px; } }
-        @media (max-width: 1200px) { .ad-side-skyscraper { width: 80px; } }
+        @media (max-width: 1650px) { .ad-side-skyscraper { width: 160px; } }
+        @media (max-width: 1600px) { .ad-side-skyscraper { width: 140px; } }
+        @media (max-width: 1550px) { .ad-side-skyscraper { width: 120px; } }
+        @media (max-width: 1500px) { .ad-side-skyscraper { width: 100px; } }
+        @media (max-width: 1450px) { .ad-side-skyscraper { width: 80px; } }
+        @media (max-width: 1400px) { .ad-side-skyscraper { width: 60px; } }
+        @media (max-width: 1350px) { .ad-side-skyscraper { width: 50px; } }
+        
+        /* Remove sidebar ads if they'd need to be < 50px */
+        @media (max-width: 1332px) { 
+            .ad-side-skyscraper { display: none; }
+        }
 
         body.mobile-mode .ad-side-skyscraper { display: none; }
 
@@ -201,86 +200,30 @@
             display: flex;
             gap: 30px;
             padding: 40px;
-            max-width: 1600px;
+            min-width: 1000px;
+            max-width: calc(100% - 632px); /* Account for sidebar ads (300px each) + gaps (16px each) */
             margin: 0 auto;
-            padding-left: max(340px, calc((100vw - 1600px) / 2 + 340px));
-            padding-right: max(340px, calc((100vw - 1600px) / 2 + 340px));
         }
 
-        @media (max-width: 2200px) {
-            .content-wrapper {
-                padding-left: max(320px, calc((100vw - 1600px) / 2 + 320px));
-                padding-right: max(320px, calc((100vw - 1600px) / 2 + 320px));
-            }
-        }
-
-        @media (max-width: 2100px) {
-            .content-wrapper {
-                padding-left: max(300px, calc((100vw - 1600px) / 2 + 300px));
-                padding-right: max(300px, calc((100vw - 1600px) / 2 + 300px));
-            }
-        }
-
-        @media (max-width: 2000px) {
-            .content-wrapper {
-                padding-left: max(280px, calc((100vw - 1600px) / 2 + 280px));
-                padding-right: max(280px, calc((100vw - 1600px) / 2 + 280px));
-            }
-        }
-
-        @media (max-width: 1900px) {
-            .content-wrapper {
-                padding-left: max(260px, calc((100vw - 1600px) / 2 + 260px));
-                padding-right: max(260px, calc((100vw - 1600px) / 2 + 260px));
-            }
-        }
-
-        @media (max-width: 1800px) {
-            .content-wrapper {
-                padding-left: max(240px, calc((100vw - 1600px) / 2 + 240px));
-                padding-right: max(240px, calc((100vw - 1600px) / 2 + 240px));
-            }
-        }
-
-        @media (max-width: 1700px) {
-            .content-wrapper {
-                padding-left: 220px;
-                padding-right: 220px;
-            }
-        }
-
-        @media (max-width: 1600px) {
-            .content-wrapper {
-                padding-left: 200px;
-                padding-right: 200px;
-            }
-        }
-
-        @media (max-width: 1500px) {
-            .content-wrapper {
-                padding-left: 180px;
-                padding-right: 180px;
-            }
-        }
-
-        @media (max-width: 1400px) {
-            .content-wrapper {
-                padding-left: 160px;
-                padding-right: 160px;
-            }
-        }
-
-        @media (max-width: 1300px) {
-            .content-wrapper {
-                padding-left: 140px;
-                padding-right: 140px;
-            }
-        }
-
-        @media (max-width: 1200px) {
-            .content-wrapper {
-                padding-left: 120px;
-                padding-right: 120px;
+        @media (max-width: 1950px) { .content-wrapper { max-width: calc(100% - 592px); } }
+        @media (max-width: 1900px) { .content-wrapper { max-width: calc(100% - 552px); } }
+        @media (max-width: 1850px) { .content-wrapper { max-width: calc(100% - 512px); } }
+        @media (max-width: 1800px) { .content-wrapper { max-width: calc(100% - 472px); } }
+        @media (max-width: 1750px) { .content-wrapper { max-width: calc(100% - 432px); } }
+        @media (max-width: 1700px) { .content-wrapper { max-width: calc(100% - 392px); } }
+        @media (max-width: 1650px) { .content-wrapper { max-width: calc(100% - 352px); } }
+        @media (max-width: 1600px) { .content-wrapper { max-width: calc(100% - 312px); } }
+        @media (max-width: 1550px) { .content-wrapper { max-width: calc(100% - 272px); } }
+        @media (max-width: 1500px) { .content-wrapper { max-width: calc(100% - 232px); } }
+        @media (max-width: 1450px) { .content-wrapper { max-width: calc(100% - 192px); } }
+        @media (max-width: 1400px) { .content-wrapper { max-width: calc(100% - 152px); } }
+        @media (max-width: 1350px) { .content-wrapper { max-width: calc(100% - 132px); } }
+        
+        /* When sidebar ads are hidden, center with 1000px min */
+        @media (max-width: 1332px) { 
+            .content-wrapper { 
+                max-width: 1000px;
+                min-width: 1000px;
             }
         }
 
@@ -303,16 +246,14 @@
         }
 
         .sidebar {
-            width: 350px;
+            width: 300px;
             flex-shrink: 0;
         }
 
-        /* Sidebar stays wide until smaller screens */
-        @media (max-width: 1600px) { .sidebar { width: 320px; } }
-        @media (max-width: 1400px) { .sidebar { width: 300px; } }
-        @media (max-width: 1200px) { .sidebar { width: 280px; } }
-        @media (max-width: 1100px) { .sidebar { width: 260px; } }
-        @media (max-width: 1000px) { .sidebar { width: 240px; } }
+        /* Sidebar shrinks proportionally if needed to keep content >= 1000px */
+        @media (max-width: 1400px) { .sidebar { width: 280px; } }
+        @media (max-width: 1300px) { .sidebar { width: 260px; } }
+        @media (max-width: 1200px) { .sidebar { width: 240px; } }
 
         .sidebar-block {
             background: #f7fafc;
@@ -366,7 +307,8 @@
         }
 
         .ad-desktop-leaderboard {
-            width: calc(100% - 600px);
+            width: calc(100% - 600px - 32px); /* Subtract sidebar ads and 16px gaps */
+            min-width: 970px;
             height: 250px;
             margin: 30px auto;
             background-color: var(--ad-fallback-color);
@@ -374,17 +316,27 @@
             background-size: cover;
         }
 
-        @media (max-width: 2200px) { .ad-desktop-leaderboard { width: calc(100% - 560px); } }
-        @media (max-width: 2100px) { .ad-desktop-leaderboard { width: calc(100% - 520px); } }
-        @media (max-width: 2000px) { .ad-desktop-leaderboard { width: calc(100% - 480px); } }
-        @media (max-width: 1900px) { .ad-desktop-leaderboard { width: calc(100% - 440px); } }
-        @media (max-width: 1800px) { .ad-desktop-leaderboard { width: calc(100% - 400px); } }
-        @media (max-width: 1700px) { .ad-desktop-leaderboard { width: calc(100% - 360px); } }
-        @media (max-width: 1600px) { .ad-desktop-leaderboard { width: calc(100% - 320px); } }
-        @media (max-width: 1500px) { .ad-desktop-leaderboard { width: calc(100% - 280px); } }
-        @media (max-width: 1400px) { .ad-desktop-leaderboard { width: calc(100% - 240px); } }
-        @media (max-width: 1300px) { .ad-desktop-leaderboard { width: calc(100% - 200px); } }
-        @media (max-width: 1200px) { .ad-desktop-leaderboard { width: calc(100% - 160px); } }
+        @media (max-width: 1950px) { .ad-desktop-leaderboard { width: calc(100% - 560px - 32px); } }
+        @media (max-width: 1900px) { .ad-desktop-leaderboard { width: calc(100% - 520px - 32px); } }
+        @media (max-width: 1850px) { .ad-desktop-leaderboard { width: calc(100% - 480px - 32px); } }
+        @media (max-width: 1800px) { .ad-desktop-leaderboard { width: calc(100% - 440px - 32px); } }
+        @media (max-width: 1750px) { .ad-desktop-leaderboard { width: calc(100% - 400px - 32px); } }
+        @media (max-width: 1700px) { .ad-desktop-leaderboard { width: calc(100% - 360px - 32px); } }
+        @media (max-width: 1650px) { .ad-desktop-leaderboard { width: calc(100% - 320px - 32px); } }
+        @media (max-width: 1600px) { .ad-desktop-leaderboard { width: calc(100% - 280px - 32px); } }
+        @media (max-width: 1550px) { .ad-desktop-leaderboard { width: calc(100% - 240px - 32px); } }
+        @media (max-width: 1500px) { .ad-desktop-leaderboard { width: calc(100% - 200px - 32px); } }
+        @media (max-width: 1450px) { .ad-desktop-leaderboard { width: calc(100% - 160px - 32px); } }
+        @media (max-width: 1400px) { .ad-desktop-leaderboard { width: calc(100% - 120px - 32px); } }
+        @media (max-width: 1350px) { .ad-desktop-leaderboard { width: calc(100% - 100px - 32px); } }
+        
+        /* When sidebar ads are hidden */
+        @media (max-width: 1332px) { 
+            .ad-desktop-leaderboard { 
+                width: 970px;
+                min-width: 970px;
+            }
+        }
 
         .ad-desktop-bottom-sticky {
             position: fixed;
@@ -409,7 +361,7 @@
 
         .ad-sidebar-large {
             width: 100%;
-            max-width: 350px;
+            max-width: 300px;
             height: 600px;
             background-color: var(--ad-fallback-color);
             background-image: var(--ad-desktop-sidebar-large);
@@ -419,7 +371,7 @@
 
         .ad-sidebar-small {
             width: 100%;
-            max-width: 350px;
+            max-width: 300px;
             height: 250px;
             background-color: var(--ad-fallback-color);
             background-image: var(--ad-desktop-sidebar-small);
@@ -427,24 +379,15 @@
             margin-bottom: 20px;
         }
 
-        /* Sidebar content ads match sidebar width */
-        @media (max-width: 1600px) {
-            .ad-sidebar-large, .ad-sidebar-small { max-width: 320px; }
-        }
-
         @media (max-width: 1400px) {
-            .ad-sidebar-large, .ad-sidebar-small { max-width: 300px; }
-        }
-
-        @media (max-width: 1200px) {
             .ad-sidebar-large, .ad-sidebar-small { max-width: 280px; }
         }
 
-        @media (max-width: 1100px) {
+        @media (max-width: 1300px) {
             .ad-sidebar-large, .ad-sidebar-small { max-width: 260px; }
         }
 
-        @media (max-width: 1000px) {
+        @media (max-width: 1200px) {
             .ad-sidebar-large, .ad-sidebar-small { max-width: 240px; }
         }
 
