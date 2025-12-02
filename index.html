@@ -39,21 +39,21 @@
             background: #1d4ed8;
         }
 
+        /* Desktop View */
+        .desktop-wrapper {
+            display: block;
+        }
+
+        .mobile-wrapper {
+            display: none;
+        }
+
         .container {
             max-width: 1200px;
             margin: 0 auto;
             background: white;
             min-height: 100vh;
             box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
-        }
-
-        /* Desktop Layout */
-        .desktop-view {
-            display: block;
-        }
-
-        .mobile-view {
-            display: none;
         }
 
         /* Header */
@@ -171,63 +171,43 @@
             text-decoration: underline;
         }
 
-        /* Mobile Layout */
-        body.mobile-mode .desktop-view {
+        /* Mobile View with Phone Frame */
+        body.mobile-mode {
+            background: #e5e7eb;
+        }
+
+        body.mobile-mode .desktop-wrapper {
             display: none;
         }
 
-        body.mobile-mode .mobile-view {
-            display: block;
-        }
-
-        body.mobile-mode .container {
-            max-width: 100%;
-        }
-
-        /* iPhone Mockup */
-        body.mobile-mode {
-            background: #e5e7eb;
+        body.mobile-mode .mobile-wrapper {
             display: flex;
             justify-content: center;
             align-items: center;
-            padding: 20px;
             min-height: 100vh;
+            padding: 20px;
         }
 
-        body.mobile-mode .container {
+        .phone-frame {
             width: 375px;
             height: 700px;
-            background: white;
-            position: relative;
             background-image: url('phone-frame.png');
-            background-size: 100% 100%;
+            background-size: contain;
             background-repeat: no-repeat;
             background-position: center;
-            padding: 15px;
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
 
-        /* iPhone Screen Content Area */
-        body.mobile-mode .mobile-view {
-            height: 100%;
-            width: 100%;
-            overflow-y: auto;
-            overflow-x: hidden;
-            border-radius: 35px;
+        .phone-screen {
+            width: 345px;
+            height: 676px;
             background: white;
-        }
-
-        /* Adjust scrollbar for iPhone mockup */
-        body.mobile-mode .mobile-view::-webkit-scrollbar {
-            width: 4px;
-        }
-
-        body.mobile-mode .mobile-view::-webkit-scrollbar-track {
-            background: transparent;
-        }
-
-        body.mobile-mode .mobile-view::-webkit-scrollbar-thumb {
-            background: #cbd5e0;
-            border-radius: 2px;
+            border-radius: 35px;
+            overflow: hidden;
+            overflow-y: auto;
         }
 
         .mobile-header {
@@ -312,14 +292,28 @@
             text-decoration: none;
             font-size: 0.95rem;
         }
+
+        /* Scrollbar styling for phone */
+        .phone-screen::-webkit-scrollbar {
+            width: 4px;
+        }
+
+        .phone-screen::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        .phone-screen::-webkit-scrollbar-thumb {
+            background: #cbd5e0;
+            border-radius: 2px;
+        }
     </style>
 </head>
 <body>
     <button class="view-toggle" onclick="toggleView()">Switch to Mobile View</button>
 
-    <div class="container">
-        <!-- Desktop View -->
-        <div class="desktop-view">
+    <!-- Desktop View -->
+    <div class="desktop-wrapper">
+        <div class="container">
             <div class="site-title">
                 <h1>Your Website Title Here</h1>
                 <p>A compelling tagline or subtitle goes here</p>
@@ -376,43 +370,47 @@
                 </aside>
             </div>
         </div>
+    </div>
 
-        <!-- Mobile View -->
-        <div class="mobile-view">
-            <div class="mobile-header">
-                <h1>Your Website Title</h1>
-                <p>Mobile optimized experience</p>
-            </div>
+    <!-- Mobile View with Phone Frame -->
+    <div class="mobile-wrapper">
+        <div class="phone-frame">
+            <div class="phone-screen">
+                <div class="mobile-header">
+                    <h1>Your Website Title</h1>
+                    <p>Mobile optimized experience</p>
+                </div>
 
-            <img src="https://images.unsplash.com/photo-1557683316-973673baf926?w=600&h=250&fit=crop" alt="Header Image" class="mobile-header-image">
+                <img src="https://images.unsplash.com/photo-1557683316-973673baf926?w=600&h=250&fit=crop" alt="Header Image" class="mobile-header-image">
 
-            <div class="mobile-content">
-                <h2>Welcome to Our Content Template</h2>
-                
-                <p>This is the mobile-optimized version of your content. The layout adapts to smaller screens with a single-column design that prioritizes readability and ease of navigation.</p>
+                <div class="mobile-content">
+                    <h2>Welcome to Our Content Template</h2>
+                    
+                    <p>This is the mobile-optimized version of your content. The layout adapts to smaller screens with a single-column design that prioritizes readability and ease of navigation.</p>
 
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Mobile users appreciate concise, scannable content that gets to the point quickly.</p>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Mobile users appreciate concise, scannable content that gets to the point quickly.</p>
 
-                <p>The mobile layout stacks content vertically, making it easy to scroll through articles while maintaining clear visual separation between different content blocks and ad units.</p>
+                    <p>The mobile layout stacks content vertically, making it easy to scroll through articles while maintaining clear visual separation between different content blocks and ad units.</p>
 
-                <p>This template ensures that your content remains accessible and engaging regardless of the device your visitors are using. The responsive design principles applied here form the foundation for effective mobile advertising integration.</p>
+                    <p>This template ensures that your content remains accessible and engaging regardless of the device your visitors are using. The responsive design principles applied here form the foundation for effective mobile advertising integration.</p>
 
-                <p>Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. The mobile experience is optimized for touch interactions and thumb-friendly navigation.</p>
-            </div>
+                    <p>Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. The mobile experience is optimized for touch interactions and thumb-friendly navigation.</p>
+                </div>
 
-            <div class="mobile-sidebar">
-                <h3>Quick Actions</h3>
-                <a href="#" class="mobile-sidebar-button">Primary Action</a>
-                <a href="#" class="mobile-sidebar-button secondary">Secondary Action</a>
+                <div class="mobile-sidebar">
+                    <h3>Quick Actions</h3>
+                    <a href="#" class="mobile-sidebar-button">Primary Action</a>
+                    <a href="#" class="mobile-sidebar-button secondary">Secondary Action</a>
 
-                <h3 style="margin-top: 20px;">Related Links</h3>
-                <ul class="mobile-sidebar-links">
-                    <li><a href="#">Introduction to Web Design</a></li>
-                    <li><a href="#">Mobile Optimization Guide</a></li>
-                    <li><a href="#">Content Strategy Tips</a></li>
-                    <li><a href="#">Documentation</a></li>
-                    <li><a href="#">Support Center</a></li>
-                </ul>
+                    <h3 style="margin-top: 20px;">Related Links</h3>
+                    <ul class="mobile-sidebar-links">
+                        <li><a href="#">Introduction to Web Design</a></li>
+                        <li><a href="#">Mobile Optimization Guide</a></li>
+                        <li><a href="#">Content Strategy Tips</a></li>
+                        <li><a href="#">Documentation</a></li>
+                        <li><a href="#">Support Center</a></li>
+                    </ul>
+                </div>
             </div>
         </div>
     </div>
