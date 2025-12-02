@@ -190,43 +190,29 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            padding: 40px 20px;
+            padding: 20px;
             min-height: 100vh;
         }
 
         body.mobile-mode .container {
-            width: 393px; /* iPhone 15 Pro width */
-            height: 852px; /* iPhone 15 Pro height */
+            width: 375px;
+            height: 700px;
             background: white;
-            border-radius: 55px;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5),
-                        inset 0 0 0 12px #1f1f1f,
-                        inset 0 0 0 14px #2a2a2a;
             position: relative;
-            overflow: hidden;
-            padding: 0;
-        }
-
-        /* iPhone Notch */
-        body.mobile-mode .container::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 125px;
-            height: 30px;
-            background: #1f1f1f;
-            border-radius: 0 0 20px 20px;
-            z-index: 1000;
+            background-image: url('phone-frame.png');
+            background-size: 100% 100%;
+            background-repeat: no-repeat;
+            background-position: center;
+            padding: 15px;
         }
 
         /* iPhone Screen Content Area */
         body.mobile-mode .mobile-view {
             height: 100%;
+            width: 100%;
             overflow-y: auto;
             overflow-x: hidden;
-            border-radius: 43px;
+            border-radius: 35px;
             background: white;
         }
 
@@ -444,4 +430,3 @@
     </script>
 </body>
 </html>
-
