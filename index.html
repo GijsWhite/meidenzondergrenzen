@@ -21,7 +21,8 @@
             --ad-mobile-bottom-expanded: none;
             --ad-mobile-inline: none;
             --ad-mobile-video: none;
-            --ad-fallback-color: #f97316;
+            
+            /* Fallback colors removed - using styled ads instead */
         }
         
         * {
@@ -35,6 +36,112 @@
             line-height: 1.6;
             color: #333;
             background-color: #f5f5f5;
+        }
+
+        /* Ad Styling - Realistic Ad Design */
+        .ad-desktop-leaderboard,
+        .ad-desktop-bottom-sticky,
+        .ad-sidebar-large,
+        .ad-sidebar-small,
+        .ad-side-skyscraper,
+        .ad-desktop-incontent,
+        .ad-video,
+        .ad-mobile-bottom-sticky,
+        .ad-mobile-inline,
+        .ad-mobile-video {
+            background: rgba(245, 247, 250, 0.75);
+            border: 1px solid rgba(209, 217, 230, 0.6);
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            backdrop-filter: blur(10px);
+        }
+
+        .ad-desktop-leaderboard::before,
+        .ad-desktop-bottom-sticky::before,
+        .ad-sidebar-large::before,
+        .ad-sidebar-small::before,
+        .ad-side-skyscraper::before,
+        .ad-desktop-incontent::before,
+        .ad-video::before,
+        .ad-mobile-bottom-sticky::before,
+        .ad-mobile-inline::before,
+        .ad-mobile-video::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: 
+                linear-gradient(45deg, rgba(255,255,255,0.15) 25%, transparent 25%),
+                linear-gradient(-45deg, rgba(255,255,255,0.15) 25%, transparent 25%),
+                linear-gradient(45deg, transparent 75%, rgba(255,255,255,0.15) 75%),
+                linear-gradient(-45deg, transparent 75%, rgba(255,255,255,0.15) 75%);
+            background-size: 20px 20px;
+            background-position: 0 0, 0 10px, 10px -10px, -10px 0px;
+            opacity: 0.5;
+        }
+
+        /* Advertisement label - NOT on side skyscraper ads */
+        .ad-desktop-leaderboard::after,
+        .ad-desktop-bottom-sticky::after,
+        .ad-sidebar-large::after,
+        .ad-sidebar-small::after,
+        .ad-desktop-incontent::after,
+        .ad-mobile-bottom-sticky::after,
+        .ad-mobile-inline::after {
+            content: 'Advertisement';
+            position: absolute;
+            top: 30px;
+            right: 8px;
+            font-size: 10px;
+            font-weight: 600;
+            color: #8b92a8;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 3px 8px;
+            border-radius: 3px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            z-index: 11;
+        }
+
+        /* Ad content styling */
+        .ad-content {
+            position: relative;
+            z-index: 1;
+            text-align: center;
+            padding: 20px;
+            color: #4a5568;
+        }
+
+        .ad-brand {
+            font-size: 24px;
+            font-weight: 700;
+            color: #2d3748;
+            margin-bottom: 8px;
+            text-shadow: 0 1px 2px rgba(255, 255, 255, 0.5);
+        }
+
+        .ad-tagline {
+            font-size: 14px;
+            color: #5a6c7d;
+            font-weight: 500;
+        }
+
+        .ad-cta {
+            display: inline-block;
+            margin-top: 12px;
+            padding: 8px 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-radius: 6px;
+            font-size: 13px;
+            font-weight: 600;
+            text-decoration: none;
+            box-shadow: 0 2px 8px rgba(102, 126, 234, 0.4);
         }
 
         .view-toggle {
@@ -156,7 +263,7 @@
             top: 82px;
             width: 300px;
             height: calc(100vh - 82px);
-            background-color: var(--ad-fallback-color);
+            
             background-image: var(--ad-desktop-side-skyscraper);
             background-size: cover;
             z-index: 10;
@@ -311,7 +418,7 @@
             min-width: 970px;
             height: 250px;
             margin: 30px auto;
-            background-color: var(--ad-fallback-color);
+            
             background-image: var(--ad-desktop-leaderboard);
             background-size: cover;
         }
@@ -345,12 +452,12 @@
             transform: translateX(-50%);
             width: 970px;
             height: 100px;
-            background-color: var(--ad-fallback-color);
             background-image: var(--ad-desktop-bottom-collapsed);
             background-size: cover;
             z-index: 999;
             transition: height 0.3s ease, background-image 0.3s ease;
             box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.15);
+            overflow: hidden;
         }
 
         .ad-desktop-bottom-sticky:hover,
@@ -359,24 +466,307 @@
             background-image: var(--ad-desktop-bottom-expanded);
         }
 
+        /* Carousel for desktop sticky */
+        .ad-carousel-container-sticky {
+            width: 100%;
+            height: 100%;
+            position: relative;
+        }
+
+        .ad-carousel-slide-sticky {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            transition: opacity 0.5s ease-in-out;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .ad-carousel-slide-sticky.active {
+            opacity: 1;
+        }
+
+        .ad-carousel-slide-sticky::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: 
+                linear-gradient(45deg, rgba(255,255,255,0.15) 25%, transparent 25%),
+                linear-gradient(-45deg, rgba(255,255,255,0.15) 25%, transparent 25%),
+                linear-gradient(45deg, transparent 75%, rgba(255,255,255,0.15) 75%),
+                linear-gradient(-45deg, transparent 75%, rgba(255,255,255,0.15) 75%);
+            background-size: 20px 20px;
+            background-position: 0 0, 0 10px, 10px -10px, -10px 0px;
+            opacity: 0.5;
+        }
+
+        .ad-progress-bar-sticky {
+            flex: 1;
+            height: 3px;
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 2px;
+            overflow: hidden;
+        }
+
+        .ad-progress-fill-sticky {
+            width: 0%;
+            height: 100%;
+            background: white;
+            border-radius: 2px;
+            transition: width 0.1s linear;
+        }
+
+        .ad-progress-bar-sticky.active .ad-progress-fill-sticky {
+            animation: fillProgress 5s linear forwards;
+        }
+
+        .ad-progress-bar-sticky.completed .ad-progress-fill-sticky {
+            width: 100%;
+        }
+
+        .ad-dot-sticky {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.4);
+            transition: all 0.3s ease;
+        }
+
+        .ad-dot-sticky.active {
+            background: white;
+            width: 20px;
+            border-radius: 4px;
+        }
+
         .ad-sidebar-large {
             width: 100%;
             max-width: 300px;
             height: 600px;
-            background-color: var(--ad-fallback-color);
             background-image: var(--ad-desktop-sidebar-large);
             background-size: cover;
             margin-bottom: 20px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Carousel Container */
+        .ad-carousel-container {
+            width: 100%;
+            height: 100%;
+            position: relative;
+        }
+
+        /* Progress bars at top */
+        .ad-carousel-progress {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            right: 10px;
+            display: flex;
+            gap: 4px;
+            z-index: 10;
+        }
+
+        .ad-progress-bar {
+            flex: 1;
+            height: 3px;
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 2px;
+            overflow: hidden;
+        }
+
+        .ad-progress-fill {
+            width: 0%;
+            height: 100%;
+            background: white;
+            border-radius: 2px;
+            transition: width 0.1s linear;
+        }
+
+        .ad-progress-bar.active .ad-progress-fill {
+            animation: fillProgress 5s linear forwards;
+        }
+
+        .ad-progress-bar.completed .ad-progress-fill {
+            width: 100%;
+        }
+
+        @keyframes fillProgress {
+            from { width: 0%; }
+            to { width: 100%; }
+        }
+
+        /* Slide label (Ad 1, Ad 2, Ad 3) */
+        .ad-slide-label {
+            position: absolute;
+            top: 25px;
+            left: 10px;
+            background: rgba(0, 0, 0, 0.5);
+            color: white;
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 11px;
+            font-weight: 600;
+            z-index: 10;
+            letter-spacing: 0.5px;
+        }
+
+        /* Dot indicators at bottom */
+        .ad-carousel-dots {
+            position: absolute;
+            bottom: 15px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 6px;
+            z-index: 10;
+        }
+
+        .ad-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.4);
+            transition: all 0.3s ease;
+        }
+
+        .ad-dot.active {
+            background: white;
+            width: 20px;
+            border-radius: 4px;
+        }
+
+        /* Carousel Slides */
+        .ad-carousel-slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            transition: opacity 0.5s ease-in-out;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .ad-carousel-slide.active {
+            opacity: 1;
+        }
+
+        /* Keep existing ad styling for carousel slides */
+        .ad-carousel-slide::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: 
+                linear-gradient(45deg, rgba(255,255,255,0.15) 25%, transparent 25%),
+                linear-gradient(-45deg, rgba(255,255,255,0.15) 25%, transparent 25%),
+                linear-gradient(45deg, transparent 75%, rgba(255,255,255,0.15) 75%),
+                linear-gradient(-45deg, transparent 75%, rgba(255,255,255,0.15) 75%);
+            background-size: 20px 20px;
+            background-position: 0 0, 0 10px, 10px -10px, -10px 0px;
+            opacity: 0.5;
         }
 
         .ad-sidebar-small {
             width: 100%;
             max-width: 300px;
             height: 250px;
-            background-color: var(--ad-fallback-color);
             background-image: var(--ad-desktop-sidebar-small);
             background-size: cover;
             margin-bottom: 20px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Carousel for sidebar small ad */
+        .ad-carousel-container-small {
+            width: 100%;
+            height: 100%;
+            position: relative;
+        }
+
+        .ad-carousel-slide-small {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            transition: opacity 0.5s ease-in-out;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .ad-carousel-slide-small.active {
+            opacity: 1;
+        }
+
+        .ad-carousel-slide-small::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: 
+                linear-gradient(45deg, rgba(255,255,255,0.15) 25%, transparent 25%),
+                linear-gradient(-45deg, rgba(255,255,255,0.15) 25%, transparent 25%),
+                linear-gradient(45deg, transparent 75%, rgba(255,255,255,0.15) 75%),
+                linear-gradient(-45deg, transparent 75%, rgba(255,255,255,0.15) 75%);
+            background-size: 20px 20px;
+            background-position: 0 0, 0 10px, 10px -10px, -10px 0px;
+            opacity: 0.5;
+        }
+
+        .ad-progress-bar-small {
+            flex: 1;
+            height: 3px;
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 2px;
+            overflow: hidden;
+        }
+
+        .ad-progress-fill-small {
+            width: 0%;
+            height: 100%;
+            background: white;
+            border-radius: 2px;
+            transition: width 0.1s linear;
+        }
+
+        .ad-progress-bar-small.active .ad-progress-fill-small {
+            animation: fillProgress 5s linear forwards;
+        }
+
+        .ad-progress-bar-small.completed .ad-progress-fill-small {
+            width: 100%;
+        }
+
+        .ad-dot-small {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.4);
+            transition: all 0.3s ease;
+        }
+
+        .ad-dot-small.active {
+            background: white;
+            width: 20px;
+            border-radius: 4px;
         }
 
         @media (max-width: 1400px) {
@@ -395,7 +785,7 @@
             width: 100%;
             max-width: 700px;
             height: 350px;
-            background-color: var(--ad-fallback-color);
+            
             background-image: var(--ad-desktop-incontent);
             background-size: cover;
             margin: 30px auto;
@@ -405,7 +795,7 @@
             width: 100%;
             max-width: 700px;
             height: 394px;
-            background-color: var(--ad-fallback-color);
+            
             background-image: var(--ad-desktop-video);
             background-size: cover;
             margin: 30px auto;
@@ -418,9 +808,28 @@
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            font-size: 48px;
+            font-size: 64px;
             color: white;
-            opacity: 0.8;
+            text-shadow: 
+                0 0 20px rgba(0, 0, 0, 0.8),
+                0 4px 12px rgba(0, 0, 0, 0.6),
+                0 2px 4px rgba(0, 0, 0, 0.4);
+            z-index: 2;
+            background: rgba(0, 0, 0, 0.5);
+            width: 100px;
+            height: 100px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            padding-left: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .ad-video:hover::before {
+            background: rgba(0, 0, 0, 0.7);
+            transform: translate(-50%, -50%) scale(1.1);
         }
 
         body.mobile-mode {
@@ -620,7 +1029,6 @@
             bottom: 0;
             width: 320px;
             height: 130px;
-            background-color: var(--ad-fallback-color);
             background-image: var(--ad-mobile-bottom-collapsed);
             background-size: cover;
             z-index: 200;
@@ -630,6 +1038,7 @@
             margin-left: auto;
             margin-right: auto;
             margin-top: auto;
+            overflow: hidden;
         }
 
         body.mobile-mode .ad-mobile-bottom-sticky:hover,
@@ -639,20 +1048,179 @@
             background-image: var(--ad-mobile-bottom-expanded);
         }
 
+        /* Carousel for mobile bottom sticky */
+        .ad-carousel-container-mobile-sticky {
+            width: 100%;
+            height: 100%;
+            position: relative;
+        }
+
+        .ad-carousel-slide-mobile-sticky {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            transition: opacity 0.5s ease-in-out;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .ad-carousel-slide-mobile-sticky.active {
+            opacity: 1;
+        }
+
+        .ad-carousel-slide-mobile-sticky::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: 
+                linear-gradient(45deg, rgba(255,255,255,0.15) 25%, transparent 25%),
+                linear-gradient(-45deg, rgba(255,255,255,0.15) 25%, transparent 25%),
+                linear-gradient(45deg, transparent 75%, rgba(255,255,255,0.15) 75%),
+                linear-gradient(-45deg, transparent 75%, rgba(255,255,255,0.15) 75%);
+            background-size: 20px 20px;
+            background-position: 0 0, 0 10px, 10px -10px, -10px 0px;
+            opacity: 0.5;
+        }
+
+        .ad-progress-bar-mobile-sticky {
+            flex: 1;
+            height: 3px;
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 2px;
+            overflow: hidden;
+        }
+
+        .ad-progress-fill-mobile-sticky {
+            width: 0%;
+            height: 100%;
+            background: white;
+            border-radius: 2px;
+            transition: width 0.1s linear;
+        }
+
+        .ad-progress-bar-mobile-sticky.active .ad-progress-fill-mobile-sticky {
+            animation: fillProgress 5s linear forwards;
+        }
+
+        .ad-progress-bar-mobile-sticky.completed .ad-progress-fill-mobile-sticky {
+            width: 100%;
+        }
+
+        .ad-dot-mobile-sticky {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.4);
+            transition: all 0.3s ease;
+        }
+
+        .ad-dot-mobile-sticky.active {
+            background: white;
+            width: 20px;
+            border-radius: 4px;
+        }
+
         .ad-mobile-inline {
             width: 300px;
             height: 600px;
-            background-color: var(--ad-fallback-color);
             background-image: var(--ad-mobile-inline);
             background-size: cover;
             margin: 20px auto;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Carousel for mobile inline */
+        .ad-carousel-container-mobile-inline {
+            width: 100%;
+            height: 100%;
+            position: relative;
+        }
+
+        .ad-carousel-slide-mobile-inline {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            transition: opacity 0.5s ease-in-out;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .ad-carousel-slide-mobile-inline.active {
+            opacity: 1;
+        }
+
+        .ad-carousel-slide-mobile-inline::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: 
+                linear-gradient(45deg, rgba(255,255,255,0.15) 25%, transparent 25%),
+                linear-gradient(-45deg, rgba(255,255,255,0.15) 25%, transparent 25%),
+                linear-gradient(45deg, transparent 75%, rgba(255,255,255,0.15) 75%),
+                linear-gradient(-45deg, transparent 75%, rgba(255,255,255,0.15) 75%);
+            background-size: 20px 20px;
+            background-position: 0 0, 0 10px, 10px -10px, -10px 0px;
+            opacity: 0.5;
+        }
+
+        .ad-progress-bar-mobile-inline {
+            flex: 1;
+            height: 3px;
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 2px;
+            overflow: hidden;
+        }
+
+        .ad-progress-fill-mobile-inline {
+            width: 0%;
+            height: 100%;
+            background: white;
+            border-radius: 2px;
+            transition: width 0.1s linear;
+        }
+
+        .ad-progress-bar-mobile-inline.active .ad-progress-fill-mobile-inline {
+            animation: fillProgress 5s linear forwards;
+        }
+
+        .ad-progress-bar-mobile-inline.completed .ad-progress-fill-mobile-inline {
+            width: 100%;
+        }
+
+        .ad-dot-mobile-inline {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.4);
+            transition: all 0.3s ease;
+        }
+
+        .ad-dot-mobile-inline.active {
+            background: white;
+            width: 20px;
+            border-radius: 4px;
         }
 
         .ad-mobile-video {
             width: 100%;
             max-width: 320px;
             height: 180px;
-            background-color: var(--ad-fallback-color);
+            
             background-image: var(--ad-mobile-video);
             background-size: cover;
             margin: 20px auto;
@@ -665,9 +1233,28 @@
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            font-size: 36px;
+            font-size: 48px;
             color: white;
-            opacity: 0.8;
+            text-shadow: 
+                0 0 15px rgba(0, 0, 0, 0.8),
+                0 3px 8px rgba(0, 0, 0, 0.6),
+                0 2px 4px rgba(0, 0, 0, 0.4);
+            z-index: 2;
+            background: rgba(0, 0, 0, 0.5);
+            width: 80px;
+            height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            padding-left: 6px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .ad-mobile-video:hover::before {
+            background: rgba(0, 0, 0, 0.7);
+            transform: translate(-50%, -50%) scale(1.1);
         }
 
         body.mobile-mode .ad-desktop-leaderboard,
@@ -805,8 +1392,8 @@
         <span id="view-icon">💻</span>
     </button>
 
-    <div class="ad-side-skyscraper left"></div>
-    <div class="ad-side-skyscraper right"></div>
+    <div class="ad-side-skyscraper left"><div class="ad-content"><div class="ad-brand" style="font-size: 18px; writing-mode: vertical-rl; transform: rotate(180deg);">Takeover Campaign</div></div></div>
+    <div class="ad-side-skyscraper right"><div class="ad-content"><div class="ad-brand" style="font-size: 18px; writing-mode: vertical-rl; transform: rotate(180deg);">Takeover Campaign</div></div></div>
 
     <div class="desktop-wrapper">
         <div class="container">
@@ -821,7 +1408,13 @@
             </nav>
 
             <div class="header-image"></div>
-            <div class="ad-desktop-leaderboard"></div>
+            <div class="ad-desktop-leaderboard">
+                <div class="ad-content">
+                    <div class="ad-brand">Premium Brand</div>
+                    <div class="ad-tagline">Discover Innovation • Explore Excellence</div>
+                    <a href="#" class="ad-cta">Learn More</a>
+                </div>
+            </div>
 
             <div class="content-wrapper">
                 <main class="main-content">
@@ -831,7 +1424,7 @@
                     <p>The layout features a flexible main content column that adapts well to different content lengths and types. Whether you're publishing articles, blog posts, product descriptions, or any other form of content, this structure provides the foundation for effective content delivery alongside strategic ad placement.</p>
                     <p>Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam.</p>
                     
-                    <div class="ad-desktop-incontent"></div>
+                    <div class="ad-desktop-incontent"><div class="ad-content"><div class="ad-brand">Featured Product</div><div class="ad-tagline">Innovation Meets Design</div><a href="#" class="ad-cta">Discover More</a></div></div>
                     
                     <p>This template provides clear visual hierarchy and proper spacing to ensure readability while leaving strategic spaces for advertising units. The design follows modern web standards and best practices for both user experience and monetization potential.</p>
                     <p>Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt.</p>
@@ -840,7 +1433,7 @@
                     <p>Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet ut et voluptates repudiandae sint et molestiae non recusandae.</p>
                     <p>The strategic placement of advertising elements throughout this template ensures maximum visibility while maintaining content integrity.</p>
                     
-                    <div class="ad-video"></div>
+                    <div class="ad-video"><div class="ad-content"><div class="ad-brand">Watch Now</div><div class="ad-tagline">Exclusive Video Content</div></div></div>
 
                     <!-- Bottom Content Sections -->
                     <div class="bottom-content">
@@ -954,7 +1547,59 @@
                             <li><a href="#">Content Strategy Tips</a></li>
                         </ul>
                     </div>
-                    <div class="ad-sidebar-large"></div>
+                    <div class="ad-sidebar-large">
+                        <div class="ad-carousel-container">
+                            <!-- Progress bars at top -->
+                            <div class="ad-carousel-progress">
+                                <div class="ad-progress-bar active">
+                                    <div class="ad-progress-fill"></div>
+                                </div>
+                                <div class="ad-progress-bar">
+                                    <div class="ad-progress-fill"></div>
+                                </div>
+                                <div class="ad-progress-bar">
+                                    <div class="ad-progress-fill"></div>
+                                </div>
+                            </div>
+
+                            <!-- Slide 1 -->
+                            <div class="ad-carousel-slide active" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+                                <div class="ad-slide-label">Ad 1</div>
+                                <div class="ad-content">
+                                    <div class="ad-brand" style="font-size: 20px;">Premium<br>Solutions</div>
+                                    <div class="ad-tagline">Transform Your Business</div>
+                                    <a href="#" class="ad-cta">Get Started</a>
+                                </div>
+                            </div>
+
+                            <!-- Slide 2 -->
+                            <div class="ad-carousel-slide" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);">
+                                <div class="ad-slide-label">Ad 2</div>
+                                <div class="ad-content">
+                                    <div class="ad-brand" style="font-size: 20px;">Exclusive<br>Offer</div>
+                                    <div class="ad-tagline">Limited Time Deal</div>
+                                    <a href="#" class="ad-cta">Shop Now</a>
+                                </div>
+                            </div>
+
+                            <!-- Slide 3 -->
+                            <div class="ad-carousel-slide" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);">
+                                <div class="ad-slide-label">Ad 3</div>
+                                <div class="ad-content">
+                                    <div class="ad-brand" style="font-size: 20px;">New<br>Arrivals</div>
+                                    <div class="ad-tagline">Discover Latest Products</div>
+                                    <a href="#" class="ad-cta">Explore</a>
+                                </div>
+                            </div>
+
+                            <!-- Dot indicators at bottom -->
+                            <div class="ad-carousel-dots">
+                                <div class="ad-dot active"></div>
+                                <div class="ad-dot"></div>
+                                <div class="ad-dot"></div>
+                            </div>
+                        </div>
+                    </div>
                     <div class="sidebar-block">
                         <h3>Resources</h3>
                         <ul class="sidebar-links">
@@ -963,11 +1608,112 @@
                             <li><a href="#">Community Forum</a></li>
                         </ul>
                     </div>
-                    <div class="ad-sidebar-small"></div>
+                    <div class="ad-sidebar-small">
+                        <div class="ad-carousel-container-small">
+                            <!-- Progress bars -->
+                            <div class="ad-carousel-progress">
+                                <div class="ad-progress-bar-small active">
+                                    <div class="ad-progress-fill-small"></div>
+                                </div>
+                                <div class="ad-progress-bar-small">
+                                    <div class="ad-progress-fill-small"></div>
+                                </div>
+                                <div class="ad-progress-bar-small">
+                                    <div class="ad-progress-fill-small"></div>
+                                </div>
+                            </div>
+
+                            <!-- Slide 1 -->
+                            <div class="ad-carousel-slide-small active" style="background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);">
+                                <div class="ad-slide-label">Ad 1</div>
+                                <div class="ad-content">
+                                    <div class="ad-brand" style="font-size: 18px;">Special Offer</div>
+                                    <div class="ad-tagline">Limited Time Only</div>
+                                    <a href="#" class="ad-cta">Shop Now</a>
+                                </div>
+                            </div>
+
+                            <!-- Slide 2 -->
+                            <div class="ad-carousel-slide-small" style="background: linear-gradient(135deg, #30cfd0 0%, #330867 100%);">
+                                <div class="ad-slide-label">Ad 2</div>
+                                <div class="ad-content">
+                                    <div class="ad-brand" style="font-size: 18px;">Flash Sale</div>
+                                    <div class="ad-tagline">Save Big Today</div>
+                                    <a href="#" class="ad-cta">Buy Now</a>
+                                </div>
+                            </div>
+
+                            <!-- Slide 3 -->
+                            <div class="ad-carousel-slide-small" style="background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);">
+                                <div class="ad-slide-label">Ad 3</div>
+                                <div class="ad-content">
+                                    <div class="ad-brand" style="font-size: 18px;">Hot Deals</div>
+                                    <div class="ad-tagline">Don't Miss Out</div>
+                                    <a href="#" class="ad-cta">View All</a>
+                                </div>
+                            </div>
+
+                            <!-- Dot indicators -->
+                            <div class="ad-carousel-dots">
+                                <div class="ad-dot-small active"></div>
+                                <div class="ad-dot-small"></div>
+                                <div class="ad-dot-small"></div>
+                            </div>
+                        </div>
+                    </div>
                 </aside>
             </div>
         </div>
-        <div class="ad-desktop-bottom-sticky"></div>
+        <div class="ad-desktop-bottom-sticky">
+            <div class="ad-carousel-container-sticky">
+                <!-- Progress bars -->
+                <div class="ad-carousel-progress">
+                    <div class="ad-progress-bar-sticky active">
+                        <div class="ad-progress-fill-sticky"></div>
+                    </div>
+                    <div class="ad-progress-bar-sticky">
+                        <div class="ad-progress-fill-sticky"></div>
+                    </div>
+                    <div class="ad-progress-bar-sticky">
+                        <div class="ad-progress-fill-sticky"></div>
+                    </div>
+                </div>
+
+                <!-- Slide 1 -->
+                <div class="ad-carousel-slide-sticky active" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+                    <div class="ad-slide-label">Ad 1</div>
+                    <div class="ad-content">
+                        <div class="ad-brand" style="font-size: 18px;">Limited Time Offer</div>
+                        <div class="ad-tagline" style="font-size: 12px;">Save up to 50% Today</div>
+                    </div>
+                </div>
+
+                <!-- Slide 2 -->
+                <div class="ad-carousel-slide-sticky" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);">
+                    <div class="ad-slide-label">Ad 2</div>
+                    <div class="ad-content">
+                        <div class="ad-brand" style="font-size: 18px;">Mega Sale Event</div>
+                        <div class="ad-tagline" style="font-size: 12px;">Ends Tonight at Midnight</div>
+                    </div>
+                </div>
+
+                <!-- Slide 3 -->
+                <div class="ad-carousel-slide-sticky" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);">
+                    <div class="ad-slide-label">Ad 3</div>
+                    <div class="ad-content">
+                        <div class="ad-brand" style="font-size: 18px;">Free Shipping</div>
+                        <div class="ad-tagline" style="font-size: 12px;">On All Orders Over $50</div>
+                    </div>
+                </div>
+
+                <!-- Dot indicators -->
+                <div class="ad-carousel-dots">
+                    <div class="ad-dot-sticky active"></div>
+                    <div class="ad-dot-sticky"></div>
+                    <div class="ad-dot-sticky"></div>
+                </div>
+            </div>
+        </div>
     </div>
 
     <div class="mobile-wrapper">
@@ -983,7 +1729,59 @@
                     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mobile users appreciate concise, scannable content that gets to the point quickly.</p>
                     <p>The mobile layout stacks content vertically, making it easy to scroll through articles while maintaining clear visual separation between different content blocks and ad units.</p>
                     
-                    <div class="ad-mobile-inline"></div>
+                    <div class="ad-mobile-inline">
+                        <div class="ad-carousel-container-mobile-inline">
+                            <!-- Progress bars -->
+                            <div class="ad-carousel-progress">
+                                <div class="ad-progress-bar-mobile-inline active">
+                                    <div class="ad-progress-fill-mobile-inline"></div>
+                                </div>
+                                <div class="ad-progress-bar-mobile-inline">
+                                    <div class="ad-progress-fill-mobile-inline"></div>
+                                </div>
+                                <div class="ad-progress-bar-mobile-inline">
+                                    <div class="ad-progress-fill-mobile-inline"></div>
+                                </div>
+                            </div>
+
+                            <!-- Slide 1 -->
+                            <div class="ad-carousel-slide-mobile-inline active" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+                                <div class="ad-slide-label">Ad 1</div>
+                                <div class="ad-content">
+                                    <div class="ad-brand" style="font-size: 18px;">Mobile Special</div>
+                                    <div class="ad-tagline">Exclusive Mobile Deals</div>
+                                    <a href="#" class="ad-cta">Shop Now</a>
+                                </div>
+                            </div>
+
+                            <!-- Slide 2 -->
+                            <div class="ad-carousel-slide-mobile-inline" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);">
+                                <div class="ad-slide-label">Ad 2</div>
+                                <div class="ad-content">
+                                    <div class="ad-brand" style="font-size: 18px;">App Only Offer</div>
+                                    <div class="ad-tagline">Download & Save 20%</div>
+                                    <a href="#" class="ad-cta">Get App</a>
+                                </div>
+                            </div>
+
+                            <!-- Slide 3 -->
+                            <div class="ad-carousel-slide-mobile-inline" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);">
+                                <div class="ad-slide-label">Ad 3</div>
+                                <div class="ad-content">
+                                    <div class="ad-brand" style="font-size: 18px;">Mobile Exclusive</div>
+                                    <div class="ad-tagline">Special Prices Today</div>
+                                    <a href="#" class="ad-cta">See Deals</a>
+                                </div>
+                            </div>
+
+                            <!-- Dot indicators -->
+                            <div class="ad-carousel-dots">
+                                <div class="ad-dot-mobile-inline active"></div>
+                                <div class="ad-dot-mobile-inline"></div>
+                                <div class="ad-dot-mobile-inline"></div>
+                            </div>
+                        </div>
+                    </div>
                     
                     <p>This template ensures that your content remains accessible and engaging regardless of the device your visitors are using.</p>
                     <p>Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
@@ -992,7 +1790,7 @@
                     <p>Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet ut et voluptates repudiandae sint.</p>
                     <p>The strategic placement of advertising elements throughout this template ensures maximum visibility while maintaining content integrity.</p>
                     
-                    <div class="ad-mobile-video"></div>
+                    <div class="ad-mobile-video"><div class="ad-content" style="padding: 10px;"><div class="ad-brand" style="font-size: 16px;">Video Ad</div></div></div>
 
                     <!-- Mobile Bottom Content -->
                     <div class="mobile-bottom-content">
@@ -1060,7 +1858,56 @@
                         <li><a href="#">Documentation</a></li>
                     </ul>
                 </div>
-                <div class="ad-mobile-bottom-sticky"></div>
+                <div class="ad-mobile-bottom-sticky">
+                    <div class="ad-carousel-container-mobile-sticky">
+                        <!-- Progress bars -->
+                        <div class="ad-carousel-progress">
+                            <div class="ad-progress-bar-mobile-sticky active">
+                                <div class="ad-progress-fill-mobile-sticky"></div>
+                            </div>
+                            <div class="ad-progress-bar-mobile-sticky">
+                                <div class="ad-progress-fill-mobile-sticky"></div>
+                            </div>
+                            <div class="ad-progress-bar-mobile-sticky">
+                                <div class="ad-progress-fill-mobile-sticky"></div>
+                            </div>
+                        </div>
+
+                        <!-- Slide 1 -->
+                        <div class="ad-carousel-slide-mobile-sticky active" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+                            <div class="ad-slide-label">Ad 1</div>
+                            <div class="ad-content" style="padding: 10px;">
+                                <div class="ad-brand" style="font-size: 14px;">Special Offer</div>
+                                <div class="ad-tagline" style="font-size: 11px;">Limited Time</div>
+                            </div>
+                        </div>
+
+                        <!-- Slide 2 -->
+                        <div class="ad-carousel-slide-mobile-sticky" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);">
+                            <div class="ad-slide-label">Ad 2</div>
+                            <div class="ad-content" style="padding: 10px;">
+                                <div class="ad-brand" style="font-size: 14px;">Flash Deal</div>
+                                <div class="ad-tagline" style="font-size: 11px;">Save Now</div>
+                            </div>
+                        </div>
+
+                        <!-- Slide 3 -->
+                        <div class="ad-carousel-slide-mobile-sticky" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);">
+                            <div class="ad-slide-label">Ad 3</div>
+                            <div class="ad-content" style="padding: 10px;">
+                                <div class="ad-brand" style="font-size: 14px;">Big Savings</div>
+                                <div class="ad-tagline" style="font-size: 11px;">Shop Today</div>
+                            </div>
+                        </div>
+
+                        <!-- Dot indicators -->
+                        <div class="ad-carousel-dots">
+                            <div class="ad-dot-mobile-sticky active"></div>
+                            <div class="ad-dot-mobile-sticky"></div>
+                            <div class="ad-dot-mobile-sticky"></div>
+                        </div>
+                    </div>
+                </div>
             </div>
             <div class="power-button"></div>
             <div class="volume-up"></div>
@@ -1139,6 +1986,140 @@
                     }
                 });
             }
+        }
+
+        // Sidebar Large Ad Carousel
+        function initSidebarCarousel() {
+            const slides = document.querySelectorAll('.ad-carousel-slide');
+            const progressBars = document.querySelectorAll('.ad-progress-bar');
+            const dots = document.querySelectorAll('.ad-dot');
+            
+            if (slides.length === 0) return;
+
+            let currentSlide = 0;
+            const totalSlides = slides.length;
+
+            function showSlide(index) {
+                // Update slides
+                slides.forEach((slide, i) => {
+                    if (i === index) {
+                        slide.classList.add('active');
+                    } else {
+                        slide.classList.remove('active');
+                    }
+                });
+
+                // Update progress bars
+                progressBars.forEach((bar, i) => {
+                    if (i < index) {
+                        // Completed bars
+                        bar.classList.add('completed');
+                        bar.classList.remove('active');
+                    } else if (i === index) {
+                        // Current bar (animating)
+                        bar.classList.add('active');
+                        bar.classList.remove('completed');
+                        // Reset animation
+                        const fill = bar.querySelector('.ad-progress-fill');
+                        fill.style.animation = 'none';
+                        setTimeout(() => {
+                            fill.style.animation = '';
+                        }, 10);
+                    } else {
+                        // Future bars
+                        bar.classList.remove('active', 'completed');
+                    }
+                });
+
+                // Update dots
+                dots.forEach((dot, i) => {
+                    if (i === index) {
+                        dot.classList.add('active');
+                    } else {
+                        dot.classList.remove('active');
+                    }
+                });
+            }
+
+            function nextSlide() {
+                currentSlide = (currentSlide + 1) % totalSlides;
+                showSlide(currentSlide);
+            }
+
+            // Initialize first slide
+            showSlide(0);
+
+            // Auto-advance every 5 seconds
+            setInterval(nextSlide, 5000);
+        }
+
+        // Initialize carousel when page loads
+        initSidebarCarousel();
+
+        // Initialize all other carousels
+        initCarousel('.ad-carousel-slide-small', '.ad-progress-bar-small', '.ad-dot-small');
+        initCarousel('.ad-carousel-slide-sticky', '.ad-progress-bar-sticky', '.ad-dot-sticky');
+        initCarousel('.ad-carousel-slide-mobile-inline', '.ad-progress-bar-mobile-inline', '.ad-dot-mobile-inline');
+        initCarousel('.ad-carousel-slide-mobile-sticky', '.ad-progress-bar-mobile-sticky', '.ad-dot-mobile-sticky');
+
+        // Generic carousel function
+        function initCarousel(slideSelector, progressBarSelector, dotSelector) {
+            const slides = document.querySelectorAll(slideSelector);
+            const progressBars = document.querySelectorAll(progressBarSelector);
+            const dots = document.querySelectorAll(dotSelector);
+            
+            if (slides.length === 0) return;
+
+            let currentSlide = 0;
+            const totalSlides = slides.length;
+
+            function showSlide(index) {
+                // Update slides
+                slides.forEach((slide, i) => {
+                    if (i === index) {
+                        slide.classList.add('active');
+                    } else {
+                        slide.classList.remove('active');
+                    }
+                });
+
+                // Update progress bars
+                progressBars.forEach((bar, i) => {
+                    if (i < index) {
+                        bar.classList.add('completed');
+                        bar.classList.remove('active');
+                    } else if (i === index) {
+                        bar.classList.add('active');
+                        bar.classList.remove('completed');
+                        const fill = bar.querySelector('[class*="progress-fill"]');
+                        if (fill) {
+                            fill.style.animation = 'none';
+                            setTimeout(() => {
+                                fill.style.animation = '';
+                            }, 10);
+                        }
+                    } else {
+                        bar.classList.remove('active', 'completed');
+                    }
+                });
+
+                // Update dots
+                dots.forEach((dot, i) => {
+                    if (i === index) {
+                        dot.classList.add('active');
+                    } else {
+                        dot.classList.remove('active');
+                    }
+                });
+            }
+
+            function nextSlide() {
+                currentSlide = (currentSlide + 1) % totalSlides;
+                showSlide(currentSlide);
+            }
+
+            showSlide(0);
+            setInterval(nextSlide, 5000);
         }
     </script>
 </body>
