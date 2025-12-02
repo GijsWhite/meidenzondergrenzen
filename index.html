@@ -527,6 +527,10 @@
             animation: fillProgress 5s linear forwards;
         }
 
+        .ad-progress-bar-sticky.video-progress.active .ad-progress-fill-sticky {
+            animation: fillProgress 10s linear forwards;
+        }
+
         .ad-progress-bar-sticky.completed .ad-progress-fill-sticky {
             width: 100%;
         }
@@ -795,41 +799,112 @@
             width: 100%;
             max-width: 700px;
             height: 394px;
-            
-            background-image: var(--ad-desktop-video);
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             background-size: cover;
             margin: 30px auto;
             position: relative;
+            overflow: hidden;
         }
 
-        .ad-video::before {
-            content: '▶';
+        /* Animated gradient background */
+        .ad-video-animated-bg {
             position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            font-size: 64px;
-            color: white;
-            text-shadow: 
-                0 0 20px rgba(0, 0, 0, 0.8),
-                0 4px 12px rgba(0, 0, 0, 0.6),
-                0 2px 4px rgba(0, 0, 0, 0.4);
-            z-index: 2;
-            background: rgba(0, 0, 0, 0.5);
-            width: 100px;
-            height: 100px;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, 
+                rgba(102, 126, 234, 0.8) 0%,
+                rgba(118, 75, 162, 0.8) 25%,
+                rgba(240, 147, 251, 0.8) 50%,
+                rgba(245, 87, 108, 0.8) 75%,
+                rgba(102, 126, 234, 0.8) 100%
+            );
+            background-size: 400% 400%;
+            animation: gradientShift 8s ease infinite;
+        }
+
+        @keyframes gradientShift {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        /* Shimmer sweep effect */
+        .ad-video-shimmer {
+            position: absolute;
+            top: -100%;
+            left: -100%;
+            width: 300%;
+            height: 300%;
+            background: linear-gradient(
+                45deg,
+                transparent 30%,
+                rgba(255, 255, 255, 0.4) 50%,
+                transparent 70%
+            );
+            animation: shimmerSweep 3s ease-in-out infinite;
+            z-index: 1;
+        }
+
+        @keyframes shimmerSweep {
+            0% { transform: translate(-50%, -50%); }
+            100% { transform: translate(50%, 50%); }
+        }
+
+        /* Progress bar at bottom */
+        .ad-video-progress {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: rgba(0, 0, 0, 0.3);
+            z-index: 3;
+        }
+
+        .ad-video-progress-bar {
+            height: 100%;
+            background: white;
+            width: 0%;
+            animation: videoProgress 10s linear infinite;
+        }
+
+        @keyframes videoProgress {
+            0% { width: 0%; }
+            100% { width: 100%; }
+        }
+
+        /* Close button */
+        .ad-video-close {
+            position: absolute;
+            top: 8px;
+            right: 8px;
+            width: 28px;
+            height: 28px;
+            background: rgba(0, 0, 0, 0.7);
+            border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            border-radius: 50%;
-            padding-left: 8px;
             cursor: pointer;
+            z-index: 4;
+            opacity: 0;
+            pointer-events: none;
             transition: all 0.3s ease;
+            color: white;
+            font-size: 18px;
+            font-weight: 600;
+            line-height: 1;
         }
 
-        .ad-video:hover::before {
-            background: rgba(0, 0, 0, 0.7);
-            transform: translate(-50%, -50%) scale(1.1);
+        .ad-video-close.visible {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .ad-video-close:hover {
+            background: rgba(0, 0, 0, 0.9);
+            transform: scale(1.1);
         }
 
         body.mobile-mode {
@@ -1220,41 +1295,11 @@
             width: 100%;
             max-width: 320px;
             height: 180px;
-            
-            background-image: var(--ad-mobile-video);
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             background-size: cover;
             margin: 20px auto;
             position: relative;
-        }
-
-        .ad-mobile-video::before {
-            content: '▶';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            font-size: 48px;
-            color: white;
-            text-shadow: 
-                0 0 15px rgba(0, 0, 0, 0.8),
-                0 3px 8px rgba(0, 0, 0, 0.6),
-                0 2px 4px rgba(0, 0, 0, 0.4);
-            z-index: 2;
-            background: rgba(0, 0, 0, 0.5);
-            width: 80px;
-            height: 80px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 50%;
-            padding-left: 6px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .ad-mobile-video:hover::before {
-            background: rgba(0, 0, 0, 0.7);
-            transform: translate(-50%, -50%) scale(1.1);
+            overflow: hidden;
         }
 
         body.mobile-mode .ad-desktop-leaderboard,
@@ -1392,6 +1437,14 @@
         <span id="view-icon">💻</span>
     </button>
 
+    <!-- Corner scroll video - always present -->
+    <div class="ad-video-corner" id="corner-video">
+        <div class="ad-content">
+            <div class="ad-brand">Watch Now</div>
+            <div class="ad-tagline">Exclusive Video Content</div>
+        </div>
+    </div>
+
     <div class="ad-side-skyscraper left"><div class="ad-content"><div class="ad-brand" style="font-size: 18px; writing-mode: vertical-rl; transform: rotate(180deg);">Takeover Campaign</div></div></div>
     <div class="ad-side-skyscraper right"><div class="ad-content"><div class="ad-brand" style="font-size: 18px; writing-mode: vertical-rl; transform: rotate(180deg);">Takeover Campaign</div></div></div>
 
@@ -1421,6 +1474,8 @@
                     <h2>Welcome to Our Content Template</h2>
                     <p>This is the main content area where your primary article or page content will be displayed. This template is designed with ad placements in mind, providing clear content blocks that can accommodate various advertising formats without disrupting the user experience.</p>
                     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+                    
+                    
                     <p>The layout features a flexible main content column that adapts well to different content lengths and types. Whether you're publishing articles, blog posts, product descriptions, or any other form of content, this structure provides the foundation for effective content delivery alongside strategic ad placement.</p>
                     <p>Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam.</p>
                     
@@ -1433,8 +1488,8 @@
                     <p>Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet ut et voluptates repudiandae sint et molestiae non recusandae.</p>
                     <p>The strategic placement of advertising elements throughout this template ensures maximum visibility while maintaining content integrity.</p>
                     
-                    <div class="ad-video"><div class="ad-content"><div class="ad-brand">Watch Now</div><div class="ad-tagline">Exclusive Video Content</div></div></div>
-
+                    <div class="ad-desktop-incontent"><div class="ad-content"><div class="ad-brand">Featured Product</div><div class="ad-tagline">Innovation Meets Design</div><a href="#" class="ad-cta">Discover More</a></div></div>
+                    
                     <!-- Bottom Content Sections -->
                     <div class="bottom-content">
                         <!-- Comments Section -->
@@ -1677,6 +1732,9 @@
                     <div class="ad-progress-bar-sticky">
                         <div class="ad-progress-fill-sticky"></div>
                     </div>
+                    <div class="ad-progress-bar-sticky video-progress">
+                        <div class="ad-progress-fill-sticky"></div>
+                    </div>
                 </div>
 
                 <!-- Slide 1 -->
@@ -1688,18 +1746,35 @@
                     </div>
                 </div>
 
-                <!-- Slide 2 -->
+                <!-- Slide 2 - Video Ad (10s) -->
+                <div class="ad-carousel-slide-sticky video-slide" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+                    <div class="ad-slide-label">10s Video</div>
+                    <div class="ad-video-animated-bg"></div>
+                    <div class="ad-video-shimmer"></div>
+                    <div class="ad-video-progress">
+                        <div class="ad-video-progress-bar"></div>
+                    </div>
+                    <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 2;">
+                        <div style="font-size: 48px; color: white; text-shadow: 0 0 20px rgba(0,0,0,0.8); background: rgba(0,0,0,0.5); width: 80px; height: 80px; display: flex; align-items: center; justify-content: center; border-radius: 50%;">⏸</div>
+                    </div>
+                    <div class="ad-content">
+                        <div class="ad-brand" style="font-size: 18px;">Watch Now</div>
+                        <div class="ad-tagline" style="font-size: 12px;">Exclusive Video Content</div>
+                    </div>
+                </div>
+
+                <!-- Slide 3 -->
                 <div class="ad-carousel-slide-sticky" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);">
-                    <div class="ad-slide-label">Ad 2</div>
+                    <div class="ad-slide-label">Ad 3</div>
                     <div class="ad-content">
                         <div class="ad-brand" style="font-size: 18px;">Mega Sale Event</div>
                         <div class="ad-tagline" style="font-size: 12px;">Ends Tonight at Midnight</div>
                     </div>
                 </div>
 
-                <!-- Slide 3 -->
+                <!-- Slide 4 -->
                 <div class="ad-carousel-slide-sticky" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);">
-                    <div class="ad-slide-label">Ad 3</div>
+                    <div class="ad-slide-label">Ad 4</div>
                     <div class="ad-content">
                         <div class="ad-brand" style="font-size: 18px;">Free Shipping</div>
                         <div class="ad-tagline" style="font-size: 12px;">On All Orders Over $50</div>
@@ -1709,6 +1784,7 @@
                 <!-- Dot indicators -->
                 <div class="ad-carousel-dots">
                     <div class="ad-dot-sticky active"></div>
+                    <div class="ad-dot-sticky"></div>
                     <div class="ad-dot-sticky"></div>
                     <div class="ad-dot-sticky"></div>
                 </div>
@@ -1727,6 +1803,8 @@
                     <h2>Welcome to Our Content Template</h2>
                     <p>This is the mobile-optimized version of your content. The layout adapts to smaller screens with a single-column design that prioritizes readability and ease of navigation.</p>
                     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mobile users appreciate concise, scannable content that gets to the point quickly.</p>
+                    
+                    
                     <p>The mobile layout stacks content vertically, making it easy to scroll through articles while maintaining clear visual separation between different content blocks and ad units.</p>
                     
                     <div class="ad-mobile-inline">
@@ -1790,8 +1868,13 @@
                     <p>Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet ut et voluptates repudiandae sint.</p>
                     <p>The strategic placement of advertising elements throughout this template ensures maximum visibility while maintaining content integrity.</p>
                     
-                    <div class="ad-mobile-video"><div class="ad-content" style="padding: 10px;"><div class="ad-brand" style="font-size: 16px;">Video Ad</div></div></div>
-
+                    <div style="width: 300px; height: 250px; margin: 20px auto; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border-radius: 8px; display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden;">
+                        <div class="ad-content" style="padding: 10px; text-align: center;">
+                            <div class="ad-brand" style="font-size: 16px; color: white; font-weight: 600; margin-bottom: 8px;">Featured Offer</div>
+                            <div class="ad-tagline" style="font-size: 12px; color: rgba(255,255,255,0.9);">Special Deal Today</div>
+                        </div>
+                    </div>
+                    
                     <!-- Mobile Bottom Content -->
                     <div class="mobile-bottom-content">
                         <h3>Comments (3)</h3>
@@ -1868,6 +1951,9 @@
                             <div class="ad-progress-bar-mobile-sticky">
                                 <div class="ad-progress-fill-mobile-sticky"></div>
                             </div>
+                            <div class="ad-progress-bar-mobile-sticky video-progress">
+                                <div class="ad-progress-fill-mobile-sticky"></div>
+                            </div>
                             <div class="ad-progress-bar-mobile-sticky">
                                 <div class="ad-progress-fill-mobile-sticky"></div>
                             </div>
@@ -1882,18 +1968,35 @@
                             </div>
                         </div>
 
-                        <!-- Slide 2 -->
+                        <!-- Slide 2 - Video Ad (10s) -->
+                        <div class="ad-carousel-slide-mobile-sticky video-slide" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+                            <div class="ad-slide-label">10s Video</div>
+                            <div class="ad-video-animated-bg"></div>
+                            <div class="ad-video-shimmer"></div>
+                            <div class="ad-video-progress">
+                                <div class="ad-video-progress-bar"></div>
+                            </div>
+                            <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 2;">
+                                <div style="font-size: 36px; color: white; text-shadow: 0 0 20px rgba(0,0,0,0.8); background: rgba(0,0,0,0.5); width: 60px; height: 60px; display: flex; align-items: center; justify-content: center; border-radius: 50%;">⏸</div>
+                            </div>
+                            <div class="ad-content" style="padding: 10px;">
+                                <div class="ad-brand" style="font-size: 14px;">Watch Now</div>
+                                <div class="ad-tagline" style="font-size: 11px;">Exclusive Video</div>
+                            </div>
+                        </div>
+
+                        <!-- Slide 3 -->
                         <div class="ad-carousel-slide-mobile-sticky" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);">
-                            <div class="ad-slide-label">Ad 2</div>
+                            <div class="ad-slide-label">Ad 3</div>
                             <div class="ad-content" style="padding: 10px;">
                                 <div class="ad-brand" style="font-size: 14px;">Flash Deal</div>
                                 <div class="ad-tagline" style="font-size: 11px;">Save Now</div>
                             </div>
                         </div>
 
-                        <!-- Slide 3 -->
+                        <!-- Slide 4 -->
                         <div class="ad-carousel-slide-mobile-sticky" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);">
-                            <div class="ad-slide-label">Ad 3</div>
+                            <div class="ad-slide-label">Ad 4</div>
                             <div class="ad-content" style="padding: 10px;">
                                 <div class="ad-brand" style="font-size: 14px;">Big Savings</div>
                                 <div class="ad-tagline" style="font-size: 11px;">Shop Today</div>
@@ -1903,6 +2006,7 @@
                         <!-- Dot indicators -->
                         <div class="ad-carousel-dots">
                             <div class="ad-dot-mobile-sticky active"></div>
+                            <div class="ad-dot-mobile-sticky"></div>
                             <div class="ad-dot-mobile-sticky"></div>
                             <div class="ad-dot-mobile-sticky"></div>
                         </div>
@@ -2058,22 +2162,29 @@
 
         // Initialize all other carousels
         initCarousel('.ad-carousel-slide-small', '.ad-progress-bar-small', '.ad-dot-small');
-        initCarousel('.ad-carousel-slide-sticky', '.ad-progress-bar-sticky', '.ad-dot-sticky');
-        initCarousel('.ad-carousel-slide-mobile-inline', '.ad-progress-bar-mobile-inline', '.ad-dot-mobile-inline');
-        initCarousel('.ad-carousel-slide-mobile-sticky', '.ad-progress-bar-mobile-sticky', '.ad-dot-mobile-sticky');
-
-        // Generic carousel function
-        function initCarousel(slideSelector, progressBarSelector, dotSelector) {
-            const slides = document.querySelectorAll(slideSelector);
-            const progressBars = document.querySelectorAll(progressBarSelector);
-            const dots = document.querySelectorAll(dotSelector);
+        
+        // Custom desktop sticky carousel with 10s video slide
+        function initDesktopStickyCarousel() {
+            const slides = document.querySelectorAll('.ad-carousel-slide-sticky');
+            const progressBars = document.querySelectorAll('.ad-progress-bar-sticky');
+            const dots = document.querySelectorAll('.ad-dot-sticky');
+            const stickyAd = document.querySelector('.ad-desktop-bottom-sticky');
             
             if (slides.length === 0) return;
-
+            
             let currentSlide = 0;
             const totalSlides = slides.length;
+            let intervalId;
 
             function showSlide(index) {
+                // Check if video slide (index 1 - second slide)
+                const isVideoSlide = index === 1;
+                
+                // Auto-expand on video slide
+                if (stickyAd && isVideoSlide) {
+                    stickyAd.classList.add('expanded');
+                }
+
                 // Update slides
                 slides.forEach((slide, i) => {
                     if (i === index) {
@@ -2083,7 +2194,7 @@
                     }
                 });
 
-                // Update progress bars
+                // Update progress bars with correct duration
                 progressBars.forEach((bar, i) => {
                     if (i < index) {
                         bar.classList.add('completed');
@@ -2091,13 +2202,16 @@
                     } else if (i === index) {
                         bar.classList.add('active');
                         bar.classList.remove('completed');
-                        const fill = bar.querySelector('[class*="progress-fill"]');
-                        if (fill) {
-                            fill.style.animation = 'none';
-                            setTimeout(() => {
+                        // Reset animation
+                        const fill = bar.querySelector('.ad-progress-fill-sticky');
+                        fill.style.animation = 'none';
+                        setTimeout(() => {
+                            if (bar.classList.contains('video-progress')) {
+                                fill.style.animation = 'progressFill 10s linear forwards';
+                            } else {
                                 fill.style.animation = '';
-                            }, 10);
-                        }
+                            }
+                        }, 10);
                     } else {
                         bar.classList.remove('active', 'completed');
                     }
@@ -2114,12 +2228,122 @@
             }
 
             function nextSlide() {
+                // Auto-collapse if leaving video slide
+                if (stickyAd && currentSlide === 1) {
+                    stickyAd.classList.remove('expanded');
+                }
+                
+                currentSlide = (currentSlide + 1) % totalSlides;
+                
+                // Clear existing interval
+                clearInterval(intervalId);
+                
+                showSlide(currentSlide);
+                
+                // Set interval based on slide - 10s for video (slide 2, index 1), 5s for others
+                const duration = currentSlide === 1 ? 10000 : 5000;
+                intervalId = setInterval(nextSlide, duration);
+            }
+
+            showSlide(0);
+            intervalId = setInterval(nextSlide, 5000);
+        }
+        
+        initDesktopStickyCarousel();
+        
+        initCarousel('.ad-carousel-slide-mobile-inline', '.ad-progress-bar-mobile-inline', '.ad-dot-mobile-inline');
+        initCarousel('.ad-carousel-slide-mobile-sticky', '.ad-progress-bar-mobile-sticky', '.ad-dot-mobile-sticky', '.ad-mobile-bottom-sticky');
+
+        // Generic carousel function
+        function initCarousel(slideSelector, progressBarSelector, dotSelector, stickyAdSelector) {
+            const slides = document.querySelectorAll(slideSelector);
+            const progressBars = document.querySelectorAll(progressBarSelector);
+            const dots = document.querySelectorAll(dotSelector);
+            const stickyAd = stickyAdSelector ? document.querySelector(stickyAdSelector) : null;
+            
+            if (slides.length === 0) return;
+
+            let currentSlide = 0;
+            const totalSlides = slides.length;
+            let slideInterval;
+
+            function showSlide(index) {
+                // Check if current slide is video slide
+                const isVideoSlide = slides[index].classList.contains('video-slide');
+                const slideDuration = isVideoSlide ? 10000 : 5000;
+
+                // Auto-expand sticky on video slide
+                if (stickyAd && isVideoSlide) {
+                    stickyAd.classList.add('expanded');
+                } else if (stickyAd && !isVideoSlide) {
+                    // Don't auto-collapse, let user click to collapse
+                }
+
+                // Update slides
+                slides.forEach((slide, i) => {
+                    if (i === index) {
+                        slide.classList.add('active');
+                    } else {
+                        slide.classList.remove('active');
+                    }
+                });
+
+                // Update progress bars with correct duration
+                progressBars.forEach((bar, i) => {
+                    if (i < index) {
+                        bar.classList.add('completed');
+                        bar.classList.remove('active');
+                    } else if (i === index) {
+                        bar.classList.add('active');
+                        bar.classList.remove('completed');
+                        const fill = bar.querySelector('[class*="progress-fill"]');
+                        if (fill) {
+                            fill.style.animation = 'none';
+                            setTimeout(() => {
+                                if (bar.classList.contains('video-progress')) {
+                                    fill.style.animation = 'progressFill 10s linear forwards';
+                                } else {
+                                    fill.style.animation = '';
+                                }
+                            }, 10);
+                        }
+                    } else {
+                        bar.classList.remove('active', 'completed');
+                    }
+                });
+
+                // Update dots
+                dots.forEach((dot, i) => {
+                    if (i === index) {
+                        dot.classList.add('active');
+                    } else {
+                        dot.classList.remove('active');
+                    }
+                });
+
+                // Clear existing interval
+                if (slideInterval) clearInterval(slideInterval);
+                
+                // Set new interval based on slide type
+                slideInterval = setTimeout(() => {
+                    nextSlide();
+                }, slideDuration);
+            }
+
+            function nextSlide() {
+                // Check if leaving video slide
+                const wasVideoSlide = slides[currentSlide].classList.contains('video-slide');
+                
+                // Auto-collapse if leaving video slide
+                if (stickyAd && wasVideoSlide) {
+                    stickyAd.classList.remove('expanded');
+                }
+                
                 currentSlide = (currentSlide + 1) % totalSlides;
                 showSlide(currentSlide);
             }
 
             showSlide(0);
-            setInterval(nextSlide, 5000);
         }
     </script>
 </body>
