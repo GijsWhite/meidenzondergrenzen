@@ -272,31 +272,34 @@
     background: #111;
     border-radius: 4px;
     box-shadow: 0 8px 32px rgba(20,17,13,0.12);
+    display: flex;
+    flex-direction: column;
   }
+  /* 300x600 = full ad area + 14px progress header on top */
   .carousel-ad.size-300x600 {
     width: 300px;
-    height: 600px;
+    height: 614px;
   }
 
   .progress-track {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 4px;
+    flex-shrink: 0;
+    width: 100%;
+    height: 14px;
     display: flex;
     gap: 3px;
-    padding: 6px;
+    padding: 6px 8px;
     z-index: 10;
-    background: linear-gradient(to bottom, rgba(0,0,0,0.5), transparent);
+    background: #0a0a0a;
+    box-sizing: border-box;
   }
   .progress-segment {
     flex: 1;
-    height: 3px;
-    background: rgba(255,255,255,0.3);
+    height: 2px;
+    background: rgba(255,255,255,0.2);
     border-radius: 2px;
     overflow: hidden;
     position: relative;
+    align-self: center;
   }
   .progress-segment .fill {
     position: absolute;
@@ -318,8 +321,9 @@
 
   .slides {
     position: relative;
+    flex: 1;
     width: 100%;
-    height: 100%;
+    overflow: hidden;
   }
   .slide {
     position: absolute;
@@ -329,7 +333,7 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    padding: 28px 22px 22px;
+    padding: 24px 22px 36px;
     color: #fff;
   }
   .slide.active { opacity: 1; }
@@ -373,7 +377,7 @@
   }
   .slide .ad-num {
     position: absolute;
-    top: 22px;
+    top: 18px;
     right: 18px;
     font-family: var(--mono);
     font-size: 10px;
@@ -486,10 +490,14 @@
   .sticky-inner {
     max-width: 1400px;
     margin: 0 auto;
-    height: 250px;
+    height: 104px; /* 90px ad + 14px progress header */
     position: relative;
     display: flex;
     align-items: stretch;
+    transition: height 0.45s cubic-bezier(0.4, 0.0, 0.2, 1);
+  }
+  .sticky-inner.has-video {
+    height: 194px; /* 180px ad + 14px progress header */
   }
   .sticky-label {
     position: absolute;
@@ -530,49 +538,70 @@
     overflow: hidden;
   }
   .carousel-sticky .progress-track {
-    padding: 8px 32px;
+    padding: 6px 32px;
   }
   .carousel-sticky .slide {
     flex-direction: row;
     align-items: center;
-    padding: 40px 80px 30px 32px;
-    gap: 40px;
+    padding: 10px 80px 10px 32px;
+    gap: 32px;
   }
   .carousel-sticky .slide-content {
     flex: 1;
-    max-width: 50%;
+    max-width: 60%;
     position: relative;
     z-index: 2;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
   }
   .carousel-sticky .slide h3 {
-    font-size: 40px;
-    margin-top: 0;
+    font-size: 18px;
+    margin: 0;
+    line-height: 1.1;
   }
   .carousel-sticky .slide p {
-    font-size: 15px;
-    max-width: 45ch;
+    font-size: 12px;
+    max-width: 55ch;
+    margin: 0;
+    opacity: 0.85;
+    -webkit-line-clamp: 1;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    line-height: 1.3;
+  }
+  .carousel-sticky .slide .cta {
+    padding: 5px 12px;
+    font-size: 10px;
+    margin-top: 4px;
+  }
+  .carousel-sticky .slide .brand-tag {
+    margin: 0;
+    font-size: 9px;
   }
   .carousel-sticky .ad-num {
-    top: 16px;
+    top: 14px;
     right: 50px;
+    font-size: 10px;
   }
-  .carousel-sticky .slide-bg-1 .shape-a {
-    width: 250px; height: 250px;
-    top: -50px; right: 80px;
-  }
-  .carousel-sticky .slide-bg-2 .shape-a {
-    width: 280px; height: 280px;
-    top: -80px; right: 100px;
-  }
-  .carousel-sticky .slide-bg-2 .shape-b {
-    width: 200px; height: 200px;
-    top: -30px; right: 140px;
-  }
+  /* Scale decorative shapes for slim bar */
+  .carousel-sticky .slide-bg-1 .shape-a { width: 140px; height: 140px; top: -30px; right: 60px; }
+  .carousel-sticky .slide-bg-1 .shape-b { width: 50px; height: 50px; top: 30px; left: auto; right: 200px; }
+  .carousel-sticky .slide-bg-2 .shape-a { width: 160px; height: 160px; top: -40px; right: 80px; }
+  .carousel-sticky .slide-bg-2 .shape-b { width: 110px; height: 110px; top: -10px; right: 110px; }
+  .carousel-sticky .slide-bg-3 .shape-a { width: 100%; height: 1px; top: 50%; }
+  .carousel-sticky .slide-bg-3 .shape-b { width: 36px; height: 36px; top: 24px; right: 80px; }
+  .carousel-sticky .slide-bg-4 .shape-a { width: 70px; height: 70px; top: 12px; left: auto; right: 220px; }
+  .carousel-sticky .slide-bg-4 .shape-b { width: 40px; height: 60px; top: 18px; right: 60px; border-radius: 20px; }
+  .carousel-sticky .slide-bg-5 .shape-a { width: 160px; height: 160px; top: -50px; right: 50px; }
+  .carousel-sticky .slide-bg-6 .shape-a { width: 2px; height: 60%; top: 20%; left: 60%; }
+  .carousel-sticky .slide-bg-6 .shape-b { width: 10px; height: 10px; top: 20%; left: calc(60% - 4px); }
 
-  /* Video slide */
+  /* Video slide - standalone */
   .slide.video-slide {
     padding: 40px 80px 30px 32px;
-    background: #000;
+    background: #0a0a0a;
   }
   .slide.video-slide .video-wrap {
     position: absolute;
@@ -594,28 +623,168 @@
     height: 100%;
     max-width: 50%;
   }
+
+  /* Video slide INSIDE the sticky bar — full-width player with overlaid text */
+  .carousel-sticky .slide.video-slide {
+    padding: 0;
+    background: #0a0a0a;
+    display: block;
+    position: absolute;
+    inset: 0;
+  }
+  .carousel-sticky .slide.video-slide .video-wrap {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    background: #000;
+    overflow: hidden;
+  }
+  .carousel-sticky .slide.video-slide video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 1;
+    display: block;
+  }
+  /* Gradient overlay so text is legible on top of video */
+  .carousel-sticky .slide.video-slide .video-wrap::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(90deg, rgba(0,0,0,0.75) 0%, rgba(0,0,0,0.5) 40%, rgba(0,0,0,0.1) 70%, rgba(0,0,0,0) 100%);
+    pointer-events: none;
+  }
+  /* Animated shapes layer for video playback indicator */
+  .carousel-sticky .slide.video-slide .video-shapes {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 1;
+    overflow: hidden;
+  }
+  .carousel-sticky .slide.video-slide .video-shapes .vshape {
+    position: absolute;
+    will-change: transform;
+  }
+  /* Big bold orange circle drifting across */
+  .vshape-1 {
+    width: 140px; height: 140px;
+    border-radius: 50%;
+    background: #ff4d1c;
+    mix-blend-mode: screen;
+    top: -30px; right: 18%;
+    animation: vDrift 4.5s ease-in-out infinite;
+  }
+  @keyframes vDrift {
+    0%, 100% { transform: translate(0, 0) scale(1); }
+    50%      { transform: translate(-40px, 30px) scale(1.15); }
+  }
+  /* Yellow square rotating */
+  .vshape-2 {
+    width: 70px; height: 70px;
+    background: #f5d04a;
+    mix-blend-mode: screen;
+    top: 40%; right: 8%;
+    animation: vSpin 3.2s linear infinite;
+  }
+  @keyframes vSpin {
+    from { transform: rotate(0deg); }
+    to   { transform: rotate(360deg); }
+  }
+  /* Ring pulsing */
+  .vshape-3 {
+    width: 90px; height: 90px;
+    border-radius: 50%;
+    border: 4px solid #ff4d1c;
+    top: 50%; right: 28%;
+    margin-top: -45px;
+    animation: vPulse 1.8s ease-out infinite;
+  }
+  @keyframes vPulse {
+    0%   { transform: scale(0.6); opacity: 0.9; }
+    100% { transform: scale(1.8); opacity: 0; }
+  }
+  /* Bouncing dot */
+  .vshape-4 {
+    width: 24px; height: 24px;
+    border-radius: 50%;
+    background: #fff;
+    top: 30%; right: 40%;
+    animation: vBounce 1.4s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+  }
+  @keyframes vBounce {
+    0%, 100% { transform: translateY(0); }
+    50%      { transform: translateY(60px); }
+  }
+  .carousel-sticky .slide.video-slide .video-overlay {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    max-width: 50%;
+    padding: 20px 32px;
+    height: 100%;
+  }
+  .carousel-sticky .slide.video-slide h3 {
+    font-size: 26px;
+    margin: 4px 0 6px;
+    line-height: 1.1;
+  }
+  .carousel-sticky .slide.video-slide p {
+    font-size: 14px;
+    opacity: 0.85;
+    margin: 0 0 12px;
+    max-width: 55ch;
+    -webkit-line-clamp: unset;
+    display: block;
+    overflow: visible;
+  }
+  .carousel-sticky .slide.video-slide .cta {
+    padding: 8px 16px;
+    font-size: 10px;
+  }
+  .carousel-sticky .slide.video-slide .ad-num {
+    top: 16px;
+    right: 50px;
+    z-index: 3;
+  }
+
+  /* Animated "now playing" badge — equalizer bars */
   .slide.video-slide .video-badge {
     display: inline-flex;
     align-items: center;
-    gap: 6px;
+    gap: 8px;
     font-family: var(--mono);
     font-size: 10px;
     letter-spacing: 0.15em;
     text-transform: uppercase;
-    opacity: 0.9;
+    opacity: 0.95;
     margin-bottom: 10px;
   }
-  .slide.video-slide .video-badge::before {
-    content: "";
-    width: 6px; height: 6px;
+  .video-eq {
+    display: inline-flex;
+    align-items: flex-end;
+    gap: 2px;
+    height: 12px;
+  }
+  .video-eq span {
+    display: block;
+    width: 2px;
     background: #ff4d1c;
-    border-radius: 50%;
-    animation: pulse 1.5s infinite;
+    border-radius: 1px;
+    animation: eqBar 0.9s ease-in-out infinite;
   }
-  @keyframes pulse {
-    0%, 100% { opacity: 1; }
-    50% { opacity: 0.3; }
+  .video-eq span:nth-child(1) { animation-delay: 0s;    height: 60%; }
+  .video-eq span:nth-child(2) { animation-delay: 0.15s; height: 100%; }
+  .video-eq span:nth-child(3) { animation-delay: 0.3s;  height: 40%; }
+  .video-eq span:nth-child(4) { animation-delay: 0.45s; height: 80%; }
+  @keyframes eqBar {
+    0%, 100% { transform: scaleY(0.4); }
+    50% { transform: scaleY(1); }
   }
+  .video-eq span { transform-origin: bottom; }
 
   /* Progress segment in "video mode" - shows indeterminate progress */
   .progress-segment.video-active .fill {
@@ -747,14 +916,15 @@
     z-index: 50;
   }
   .device-shell .sticky-inner {
-    height: 100px; /* mobile non-video */
+    height: 114px; /* 100px ad + 14px progress header */
     padding: 0;
+    transition: height 0.45s cubic-bezier(0.4, 0.0, 0.2, 1);
   }
   .device-shell .sticky-inner.has-video {
-    height: 180px;
+    height: 194px; /* 180px ad + 14px progress header */
   }
   .device-shell .carousel-sticky .slide {
-    padding: 22px 50px 18px 18px;
+    padding: 14px 50px 16px 18px;
     gap: 16px;
   }
   .device-shell .carousel-sticky .slide h3 {
@@ -798,15 +968,39 @@
   .device-shell .progress-track {
     padding: 5px 12px;
   }
-  .device-shell .slide.video-slide {
-    padding: 22px 50px 18px 18px;
+  /* Mobile video slide — full-width player with overlaid text */
+  .device-shell .carousel-sticky .slide.video-slide {
+    padding: 0;
+    display: block;
   }
-  .device-shell .slide.video-slide .video-overlay {
+  .device-shell .carousel-sticky .slide.video-slide .video-overlay {
+    padding: 14px 16px;
     max-width: 70%;
   }
-  .device-shell .slide.video-slide .video-badge {
+  .device-shell .carousel-sticky .slide.video-slide h3 {
+    font-size: 15px;
+    margin: 2px 0 4px;
+  }
+  .device-shell .carousel-sticky .slide.video-slide p {
+    font-size: 11px;
+    -webkit-line-clamp: 2;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    margin: 0 0 8px;
+  }
+  .device-shell .carousel-sticky .slide.video-slide .cta {
+    padding: 5px 10px;
     font-size: 8px;
-    margin-bottom: 4px;
+  }
+  .device-shell .carousel-sticky .slide.video-slide .video-badge {
+    font-size: 8px;
+    margin-bottom: 2px;
+  }
+  .device-shell .carousel-sticky .slide.video-slide .ad-num {
+    top: 10px;
+    right: 36px;
+    font-size: 8px;
   }
 
   /* Mobile carousel in-content shapes scale */
@@ -853,10 +1047,10 @@
     }
     .hero { padding: 60px 24px 40px; }
     .layout { padding-left: 24px; padding-right: 24px; }
-    .sticky-inner { height: 100px; }
-    .sticky-inner.has-video { height: 180px; }
+    .sticky-inner { height: 114px; }
+    .sticky-inner.has-video { height: 194px; }
     .carousel-sticky .slide {
-      padding: 22px 50px 18px 18px;
+      padding: 14px 50px 16px 18px;
       gap: 16px;
     }
     .carousel-sticky .slide h3 { font-size: 18px; margin: 4px 0 4px; line-height: 1.05; }
@@ -867,6 +1061,15 @@
     .carousel-sticky .slide-content { max-width: 65%; }
     .carousel-sticky .slide .cta { padding: 6px 12px; font-size: 9px; }
     .carousel-sticky .ad-num { top: 12px; right: 36px; font-size: 9px; }
+    /* Narrow-browser video slide */
+    .carousel-sticky .slide.video-slide { padding: 0; display: block; }
+    .carousel-sticky .slide.video-slide .video-overlay { padding: 14px 16px; max-width: 70%; }
+    .carousel-sticky .slide.video-slide h3 { font-size: 15px; margin: 2px 0 4px; }
+    .carousel-sticky .slide.video-slide p {
+      font-size: 11px; -webkit-line-clamp: 2; display: -webkit-box;
+      -webkit-box-orient: vertical; overflow: hidden; margin: 0 0 8px;
+    }
+    .carousel-sticky .slide.video-slide .cta { padding: 5px 10px; font-size: 8px; }
     .topbar { padding: 12px 20px; }
     .topbar .meta { display: none; }
   }
@@ -931,12 +1134,12 @@
         On mobile the same creative is rendered inline, between paragraphs of the article. Switch to mobile view to see it.
       </li>
       <li>
-        <strong>Sticky bottom — Desktop (250px)</strong>
-        A tall bottom bar that scrolls with the user. Big enough to host imagery, headline, and CTA side-by-side.
+        <strong>Sticky bottom — Desktop (90px / 180px)</strong>
+        A slim 90px bar in display mode. When a video slide is being served, the bar expands to 180px and shows the video in a constrained-width player so the transition between slides feels gentler.
       </li>
       <li>
         <strong>Sticky bottom — Mobile (100px / 180px)</strong>
-        A slim 100px bar in display mode. When a video slide takes over the rotation, the bar expands to 180px to give the player room to breathe.
+        A slim 100px bar in display mode. Like the desktop variant, it expands to 180px for video slides with the player anchored to the left.
       </li>
     </ul>
 
@@ -1096,8 +1299,17 @@ function buildSlide(ad, index) {
             <source src="${VIDEO_SRC}" type="video/mp4">
           </video>
         </div>
+        <div class="video-shapes">
+          <div class="vshape vshape-1"></div>
+          <div class="vshape vshape-2"></div>
+          <div class="vshape vshape-3"></div>
+          <div class="vshape vshape-4"></div>
+        </div>
         <div class="video-overlay">
-          <div class="video-badge">Now playing · video</div>
+          <div class="video-badge">
+            <span class="video-eq"><span></span><span></span><span></span><span></span></span>
+            Now playing
+          </div>
           <h3>${ad.headline}</h3>
           <p>${ad.body}</p>
           <a class="cta" href="#" onclick="event.preventDefault()">${ad.cta}</a>
@@ -1188,29 +1400,25 @@ class Carousel {
 
     if (isVideo) {
       const video = currentSlide.querySelector('video');
+      const VIDEO_DURATION = 15; // fixed 15s per video slide
       activeSeg.classList.add('video-active');
-      // Start the video. When metadata is loaded, set the progress bar fill duration to match.
-      const playVideo = () => {
-        const dur = (video.duration && isFinite(video.duration)) ? video.duration : 15;
-        activeFill.style.animationDuration = dur + 's';
-        video.play().catch(() => {
-          // autoplay blocked — fall back to 8s timer
-          this.timeout = setTimeout(() => this.next(), 8000);
+      activeFill.style.animationDuration = VIDEO_DURATION + 's';
+
+      // Reset and play
+      try { video.currentTime = 0; } catch (e) {}
+      video.muted = true; // required for autoplay in most browsers
+      const playPromise = video.play();
+      if (playPromise && playPromise.catch) {
+        playPromise.catch(() => {
+          // autoplay blocked — progress bar still runs, advance after 15s
         });
-      };
-      if (video.readyState >= 1) {
-        playVideo();
-      } else {
-        video.addEventListener('loadedmetadata', playVideo, { once: true });
-        // safety fallback if video fails entirely
-        video.addEventListener('error', () => {
-          activeFill.style.animationDuration = '8s';
-          this.timeout = setTimeout(() => this.next(), 8000);
-        }, { once: true });
       }
-      video.onended = () => this.next();
-      // Also fallback timeout (in case onended doesn't fire)
-      this.timeout = setTimeout(() => this.next(), 60000);
+
+      // Hard cut at exactly 15s so the slot duration is predictable
+      this.timeout = setTimeout(() => {
+        try { video.pause(); } catch (e) {}
+        this.next();
+      }, VIDEO_DURATION * 1000);
     } else {
       activeSeg.classList.add('active');
       activeFill.style.animationDuration = (this.duration / 1000) + 's';
@@ -1243,8 +1451,7 @@ function initCarousels(scope = document) {
     const inner = document.getElementById('stickyInner');
     new Carousel(el, stickyAds, {
       onVideoToggle: (isVideo) => {
-        // Desktop sticky stays 250px regardless (user spec didn't change desktop height for video)
-        inner.classList.toggle('has-video', false);
+        inner.classList.toggle('has-video', isVideo);
       }
     });
   });
